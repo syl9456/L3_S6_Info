@@ -1,0 +1,7 @@
+conj2,ip,vip1,1,1,1,2,2,3,ii,vii1,2,2,2,2,2,2,ps,vps1,4,4,4,5,5,4,if,vf1,1,1,1,1,1,1,cd,vc1,1,1,1,1,1,1,sp,vsp1,3,3,3,2,2,3,si,vsi1,4,4,5,4,4,4,imp,vip1,0,1,0,2,2,0,pi,vpt1,2,2,2,2,2,2
+conj4,nomadj,nom1,1,0,1,0
+conj5,nomadj,nom1,0,1,0,1
+conj6,nomadj,nom5,1,0,1,0
+conj7,nomadj,nom3,1,1,1,1
+conj8,nomadj,nom4,1,1,1,1
+conj9,nomadj,nom2,1,1,1,1
