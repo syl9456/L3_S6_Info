@@ -165,8 +165,10 @@ void remplissageBalayage(){
 	int Ymin = 2147000000;
 	int Ymax = -2147000000;
 	int t;
-	int Xmin;
-	int Xmax;
+	int Xintersec;
+	int Xmin = 2147000000;
+	int Xmax = -2147000000;
+	int indiceEntrant = 0;
 
 	/* On cherche Ymin et Ymax */
 
@@ -188,10 +190,9 @@ void remplissageBalayage(){
 	LCE(Ymin, Ymax);
 	LCS(Ymin, Ymax);
 
-	/*for(int y0 = Ymin; y0 <= Ymax; y0++){
-
-	}*/
-	
+	for(int y0 = Ymin; y0 <= Ymax; y0++){
+		
+	}
 }
 
 

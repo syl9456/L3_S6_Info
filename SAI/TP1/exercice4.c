@@ -99,8 +99,10 @@ void bressenhamEntier(int x1, int y1, int x2, int y2){
 					}
 				}
 			}
-			else{
-
+			else{ 										/* Vecteur horizontal de gauche a droite */
+				for(X = x1; X <= x2; X++){
+					trace_pixel(X, Y);
+				}
 			}
 		}
 		else{
@@ -152,12 +154,28 @@ void bressenhamEntier(int x1, int y1, int x2, int y2){
 					}
 				}
 			}
-			else{
-
+			else{ 										/* Vecteur horizontal de droite a gauche */
+				for(X = x1; X >= x2; X--){
+					trace_pixel(X, Y);
+				}
 			}
 		}
 	}
 	else{
+		if(deltaY != 0){
+			if(deltaY > 0){ 							/* Vecteur vertical de bas en haut */
+				X = x1;
+				for(Y = y1; Y <= y2; Y++){
+					trace_pixel(X, Y);
+				}
+			}
+			else{										/* Vecteur vertical de haut en bas */
+				X = x1;
+				for(Y = y1; Y >= y2; Y--){
+					trace_pixel(X, Y);
+				}
+			}
+		}
 
 	}
 	
@@ -190,7 +208,7 @@ void Affichage(){
 int main(int argc, char *argv[]){
 
 	if(argc != 7){
-		printf("\n\nUsage : ./Exercice3 [x1] [y1] [x2] [y2] [TaillePixel] [1 = bressenhamElementaire || 2 = bressenhamEntier]\n\n");
+		printf("\n\nUsage : ./Exercice4 [x1] [y1] [x2] [y2] [TaillePixel] [1 = bressenhamElementaire || 2 = bressenhamEntier]\n\n");
 		exit(1);
 	}
 	else{
