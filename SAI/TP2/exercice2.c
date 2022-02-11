@@ -164,11 +164,12 @@ void LCS(int Ymin, int Ymax){
 void remplissageBalayage(){
 	int Ymin = 2147000000;
 	int Ymax = -2147000000;
-	int t;
-	int Xintersec;
-	int Xmin = 2147000000;
-	int Xmax = -2147000000;
+	float t1, t2;
+	int Xintersec1, Xintersec2;
+	int Xmin;
+	int Xmax;
 	int indiceEntrant = 0;
+
 
 	/* On cherche Ymin et Ymax */
 
@@ -191,7 +192,35 @@ void remplissageBalayage(){
 	LCS(Ymin, Ymax);
 
 	for(int y0 = Ymin; y0 <= Ymax; y0++){
-		
+		t1 = ((y0 - coteCandidat[coteEntrant[indiceEntrant]].p1.y) / (coteCandidat[coteEntrant[indiceEntrant]].p2.y - coteCandidat[coteEntrant[indiceEntrant]].p1.y));
+		t2 = ((y0 - coteCandidat[coteEntrant[indiceEntrant+1]].p1.y) / (coteCandidat[coteEntrant[indiceEntrant+1]].p2.y - coteCandidat[coteEntrant[indiceEntrant+1]].p1.y));
+		printf("y0[%d] t1[%f] t2[%f]\n", y0, t1, t2);
+		Xintersec1 = coteCandidat[coteEntrant[indiceEntrant]].p1.x + (t1 * (coteCandidat[coteEntrant[indiceEntrant]].p2.x - coteCandidat[coteEntrant[indiceEntrant]].p1.x));
+		Xintersec2 = coteCandidat[coteEntrant[indiceEntrant+1]].p1.x + (t2 * (coteCandidat[coteEntrant[indiceEntrant+1]].p2.x - coteCandidat[coteEntrant[indiceEntrant+1]].p1.x));
+		if(Xintersec1 < Xintersec2){
+			Xmin = Xintersec1;
+			Xmax = Xintersec2;
+		}
+		else{
+			Xmin = Xintersec2;
+			Xmax = Xintersec1;
+		}
+		printf("\nXmin[%d] Xmax[%d]\n", Xmin, Xmax);
+		for(int i = Xmin; i <= Xmax; i++){
+			trace_pixel(i, y0);
+		}
+		if(y0 >= coteCandidat[coteEntrant[indiceEntrant]].p1.y && y0 >= coteCandidat[coteEntrant[indiceEntrant]].p2.y && y0 >= coteCandidat[coteEntrant[indiceEntrant+1]].p1.y && y0 >= coteCandidat[coteEntrant[indiceEntrant+1]].p2.y){
+			indiceEntrant += 2;
+		}
+		else if(y0 >= coteCandidat[coteEntrant[indiceEntrant]].p1.y && y0 >= coteCandidat[coteEntrant[indiceEntrant]].p2.y){
+			indiceEntrant++;
+		}
+		else if(y0 >= coteCandidat[coteEntrant[indiceEntrant+1]].p1.y && y0 >= coteCandidat[coteEntrant[indiceEntrant+1]].p2.y){
+			indiceEntrant++;
+		}
+	}
+	for(int i = 0; i <= nbPoint; i++){
+		trace_pixel(tabPoint[i].x-200, tabPoint[i].y);
 	}
 }
 
