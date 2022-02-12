@@ -13,9 +13,11 @@ typedef struct cote{
 }cote;
 
 float taille_Pixel;
-int monX1, monY1, monR;
 int nbCote;
 int nbPoint;
+double M1, M2, K1, K2;
+int Xmin, Xmax;
+int indiceEntrant = 0;
 
 cote coteCandidat[1000];
 int coteEntrant[1000];
@@ -157,6 +159,96 @@ void LCS(int Ymin, int Ymax){
 
 }
 
+void calculeIntersec(int y0){
+
+	/* Coté A */
+
+	int xA1 = coteCandidat[coteEntrant[indiceEntrant]].p1.x;
+	int yA1 = coteCandidat[coteEntrant[indiceEntrant]].p1.y;
+	int xA2 = coteCandidat[coteEntrant[indiceEntrant]].p2.x;
+	int yA2 = coteCandidat[coteEntrant[indiceEntrant]].p2.y;
+
+	/* Coté B */
+
+	int xB1 = coteCandidat[coteEntrant[indiceEntrant+1]].p1.x;
+	int yB1 = coteCandidat[coteEntrant[indiceEntrant+1]].p1.y;
+	int xB2 = coteCandidat[coteEntrant[indiceEntrant+1]].p2.x;
+	int yB2 = coteCandidat[coteEntrant[indiceEntrant+1]].p2.y;
+
+	/* Test de quel coté vas être le Xmin et le Xmax */
+
+	if((xA1 <= xB1 && xA1 <= xB2) || (xA2 <= xB1 && xA2 <= xB2)){ /* Coté A Xmin et B Xmax */
+		if(xA2 - xA1 == 0 && xB2 - xB1 == 0){ /* Ligne vertical A et B */
+			Xmin = xA1;
+			Xmax = xB1;
+			return;
+		}
+		else if(xA2 - xA1 == 0){ /* Ligne vertical coté A */
+			Xmin = xA1;
+			M2 = (double)(yB2 - yB1) / (xB2 - xB1); /* Calcule du coef directeur du coté B */
+			K2 = -((M2 * xB1) - yB1); 			/* Calcule de K pour l'équation [y = m*x + K] */
+			Xmax = -((K2 - y0) / M2);
+		}
+		else if(xB2 - xB1 == 0){ /* Ligne vertical coté B */
+			Xmax = xB1;
+			M1 = (double)(yA2 - yA1) / (xA2 - xA1); /* Calcule du coef directeur du coté A */
+			K1 = -((M1 * xA1) - yA1);			/* Calcule de K pour l'équation [y = m*x + K] */
+			Xmin = -((K1 - y0) / M1);
+		}
+		else{
+			/* Calcule des coef directeur des coté (M1 prend celui du Xmin et M2 le Xmax) */
+			M1 = (double)(yA2 - yA1) / (xA2 - xA1);
+			M2 = (double)(yB2 - yB1) / (xB2 - xB1);
+
+			/* Calcule de K pour l'équation [y = m*x + K] */
+			K1 = -((M1 * xA1) - yA1);
+			K2 = -((M2 * xB1) - yB1);
+
+			/* Calcule de Xmin et Xmax */
+			Xmin = -((K1 - y0) / M1);
+			Xmax = -((K2 - y0) / M2);
+		}
+	}
+	else{ 	/* Coté B Xmin et A Xmax */
+		if(xA2 - xA1 == 0 && xB2 - xB1 == 0){ /* Ligne vertical A et B */
+			Xmin = xB1;
+			Xmax = xA1;
+			return;
+		}
+		else if(xA2 - xA1 == 0){ /* Ligne vertical coté A */
+			Xmax = xA1;
+			M1 = (double)(yB2 - yB1) / (xB2 - xB1); /* Calcule du coef directeur du coté B */
+			K1 = -((M1 * xB1) - yB1); 			/* Calcule de K pour l'équation [y = m*x + K] */
+			Xmin = -((K1 - y0) / M1);
+		}
+		else if(xB2 - xB1 == 0){ /* Ligne vertical coté B */
+			Xmin = xB1;
+			M2 = (double)(yA2 - yA1) / (xA2 - xA1); /* Calcule du coef directeur du coté A */
+			K2 = -((M2 * xA1) - yA1);			/* Calcule de K pour l'équation [y = m*x + K] */
+			Xmax = -((K1 - y0) / M1);
+		}
+		else{
+			/* Calcule des coef directeur des coté (M1 prend celui du Xmin et M2 le Xmax) */
+			M2 = (double)(yA2 - yA1) / (xA2 - xA1);
+			M1 = (double)(yB2 - yB1) / (xB2 - xB1);
+
+			/* Calcule de K pour l'équation [y = m*x + K] */
+			K2 = -((M2 * xA1) - yA1);
+			K1 = -((M1 * xB1) - yB1);
+
+			printf("[%d] + (-[%f] * -[%d]\n", yB1, M1, xB1);
+			printf("[%d] + (-[%f] * -[%d]\n", yA1, M2, xA1);
+			printf("M1[%f], M2[%f], K1[%f], K2[%f]\n", M1, M2, K1, K2);
+
+			/* Calcule de Xmin et Xmax */
+			Xmin = -((K1 - y0) / M1);
+			Xmax = -((K2 - y0) / M2);
+		}
+	}
+	printf("Xmin[%d]--Xmax[%d]\n", Xmin, Xmax);
+
+}
+
 /*
 *	Remplissage
 */
@@ -164,12 +256,6 @@ void LCS(int Ymin, int Ymax){
 void remplissageBalayage(){
 	int Ymin = 2147000000;
 	int Ymax = -2147000000;
-	float t1, t2;
-	int Xintersec1, Xintersec2;
-	int Xmin;
-	int Xmax;
-	int indiceEntrant = 0;
-
 
 	/* On cherche Ymin et Ymax */
 
@@ -192,23 +278,9 @@ void remplissageBalayage(){
 	LCS(Ymin, Ymax);
 
 	for(int y0 = Ymin; y0 <= Ymax; y0++){
-		t1 = ((y0 - coteCandidat[coteEntrant[indiceEntrant]].p1.y) / (coteCandidat[coteEntrant[indiceEntrant]].p2.y - coteCandidat[coteEntrant[indiceEntrant]].p1.y));
-		t2 = ((y0 - coteCandidat[coteEntrant[indiceEntrant+1]].p1.y) / (coteCandidat[coteEntrant[indiceEntrant+1]].p2.y - coteCandidat[coteEntrant[indiceEntrant+1]].p1.y));
-		printf("y0[%d] t1[%f] t2[%f]\n", y0, t1, t2);
-		Xintersec1 = coteCandidat[coteEntrant[indiceEntrant]].p1.x + (t1 * (coteCandidat[coteEntrant[indiceEntrant]].p2.x - coteCandidat[coteEntrant[indiceEntrant]].p1.x));
-		Xintersec2 = coteCandidat[coteEntrant[indiceEntrant+1]].p1.x + (t2 * (coteCandidat[coteEntrant[indiceEntrant+1]].p2.x - coteCandidat[coteEntrant[indiceEntrant+1]].p1.x));
-		if(Xintersec1 < Xintersec2){
-			Xmin = Xintersec1;
-			Xmax = Xintersec2;
-		}
-		else{
-			Xmin = Xintersec2;
-			Xmax = Xintersec1;
-		}
-		printf("\nXmin[%d] Xmax[%d]\n", Xmin, Xmax);
-		for(int i = Xmin; i <= Xmax; i++){
-			trace_pixel(i, y0);
-		}
+
+		/* Test si on sort d'un coté */
+
 		if(y0 >= coteCandidat[coteEntrant[indiceEntrant]].p1.y && y0 >= coteCandidat[coteEntrant[indiceEntrant]].p2.y && y0 >= coteCandidat[coteEntrant[indiceEntrant+1]].p1.y && y0 >= coteCandidat[coteEntrant[indiceEntrant+1]].p2.y){
 			indiceEntrant += 2;
 		}
@@ -218,6 +290,16 @@ void remplissageBalayage(){
 		else if(y0 >= coteCandidat[coteEntrant[indiceEntrant+1]].p1.y && y0 >= coteCandidat[coteEntrant[indiceEntrant+1]].p2.y){
 			indiceEntrant++;
 		}
+
+		/* Calcule de M1, M2, K1, K2, Xmin, Xmax avec y0 */
+
+		calculeIntersec(y0);
+
+		printf("\nXmin[%d] Xmax[%d]\n", Xmin, Xmax);
+		for(int i = Xmin; i <= Xmax; i++){
+			trace_pixel(i, y0);
+		}
+		
 	}
 	for(int i = 0; i <= nbPoint; i++){
 		trace_pixel(tabPoint[i].x-200, tabPoint[i].y);
