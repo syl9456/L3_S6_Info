@@ -175,9 +175,32 @@ void calculeIntersec(int y0){
 	int xB2 = coteCandidat[coteEntrant[indiceEntrant+1]].p2.x;
 	int yB2 = coteCandidat[coteEntrant[indiceEntrant+1]].p2.y;
 
+
 	/* Test de quel coté vas être le Xmin et le Xmax */
 
 	if((xA1 <= xB1 && xA1 <= xB2) || (xA2 <= xB1 && xA2 <= xB2)){ /* Coté A Xmin et B Xmax */
+		if(yA1 - yA2 == 0 || yB2 - yB1 == 0){ /* Cote A ou B Horizontaux */
+			if(xA1 < xA2){
+				Xmin = xA1;
+				if(xB1 > xB2){
+					Xmax = xB1;
+				}
+				else{
+					Xmax = xB2;
+				}
+				return;
+			}
+			else{
+				Xmin = xA2;
+				if(xB1 > xB2){
+					Xmax = xB1;
+				}
+				else{
+					Xmax = xB2;
+				}
+				return;
+			}
+		}
 		if(xA2 - xA1 == 0 && xB2 - xB1 == 0){ /* Ligne vertical A et B */
 			Xmin = xA1;
 			Xmax = xB1;
@@ -210,6 +233,28 @@ void calculeIntersec(int y0){
 		}
 	}
 	else{ 	/* Coté B Xmin et A Xmax */
+		if(yA1 - yA2 == 0 || yB2 - yB1 == 0){ /* Cote A ou B Horizontaux */
+			if(xA1 < xA2){
+				Xmin = xA1;
+				if(xB1 > xB2){
+					Xmax = xB1;
+				}
+				else{
+					Xmax = xB2;
+				}
+				return;
+			}
+			else{
+				Xmin = xA2;
+				if(xB1 > xB2){
+					Xmax = xB1;
+				}
+				else{
+					Xmax = xB2;
+				}
+				return;
+			}
+		}
 		if(xA2 - xA1 == 0 && xB2 - xB1 == 0){ /* Ligne vertical A et B */
 			Xmin = xB1;
 			Xmax = xA1;
@@ -236,16 +281,11 @@ void calculeIntersec(int y0){
 			K2 = -((M2 * xA1) - yA1);
 			K1 = -((M1 * xB1) - yB1);
 
-			printf("[%d] + (-[%f] * -[%d]\n", yB1, M1, xB1);
-			printf("[%d] + (-[%f] * -[%d]\n", yA1, M2, xA1);
-			printf("M1[%f], M2[%f], K1[%f], K2[%f]\n", M1, M2, K1, K2);
-
 			/* Calcule de Xmin et Xmax */
 			Xmin = -((K1 - y0) / M1);
 			Xmax = -((K2 - y0) / M2);
 		}
 	}
-	printf("Xmin[%d]--Xmax[%d]\n", Xmin, Xmax);
 
 }
 
@@ -277,7 +317,7 @@ void remplissageBalayage(){
 	LCE(Ymin, Ymax);
 	LCS(Ymin, Ymax);
 
-	for(int y0 = Ymin; y0 <= Ymax; y0++){
+	for(int y0 = Ymin; y0 < Ymax; y0++){
 
 		/* Test si on sort d'un coté */
 
@@ -295,7 +335,6 @@ void remplissageBalayage(){
 
 		calculeIntersec(y0);
 
-		printf("\nXmin[%d] Xmax[%d]\n", Xmin, Xmax);
 		for(int i = Xmin; i <= Xmax; i++){
 			trace_pixel(i, y0);
 		}
