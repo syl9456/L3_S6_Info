@@ -1,0 +1,15 @@
+être,conj1,verbe,s,ê,ét,f
+venir,conj2,verbe,vien,ven,vienn,vin,vîn
+tenir,conj2,verbe,tien,ten,tienn,tin,tîn
+manger,conj2,verbe,mange,mang
+aimer,conj3,verbe,aim
+créer,conj3,verbe,cré
+apprécier,conj3,verbe,appréci
+arbre,conj4,nom,arbre
+soleil,conj4,nom,soleil
+cou,conj4,nom,cou
+lune,conj5,nom,lune
+bijou,conj6,nom,bijou
+aviateur,conj7,nom,avia
+charmeur,conj8,nom,charm
+professeur,conj9,nom,professeur

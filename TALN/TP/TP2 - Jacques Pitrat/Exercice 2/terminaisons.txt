@@ -1,0 +1,13 @@
+vip1,s,s,t,ons,ez,ent
+vii1,ais,ais,ait,ions,iez,aient
+vps1,s,s,t,mes,tes,rent
+vf1,drai,dras,dra,drons,drez,dront
+vc1,drais,drais,drait,drions,driez,draient
+vsp1,e,es,e,ions,iez,ent
+vsi1,sse,sses,t,ssions,ssiez,ssent
+vpt1,u,ue,us,ues,ant,ir
+nom1,_,_,s,s
+nom2,_,e,s,es
+nom3,teur,trice,teurs,trices
+nom4,eur,euse,eurs,euses
+nom5,_,_,x,_
