@@ -23,6 +23,8 @@ point D;
 matrice S;
 matrice R;
 matrice T;
+matrice T1;
+matrice T2;
 
 /*
 *	Primitive de trace_picel(x,y)
@@ -45,7 +47,7 @@ matrice multiMatrice(matrice mat1, matrice mat2){
 	for(int i = 0; i <= 2; i++){
 		for(int j = 0; j <= 2; j++){
 			result.donnee[i][j] = 0;
-			for(int k = 0; k <= 2; i++){
+			for(int k = 0; k <= 2; k++){
 				result.donnee[i][j] = result.donnee[i][j] + (mat1.donnee[i][k] * mat2.donnee[k][j]);
 			}
 		}
@@ -58,14 +60,9 @@ matrice multiMatrice(matrice mat1, matrice mat2){
 */
 point multiMatricePoint(matrice m, point p){
 	point result;
-	for(int i = 0; i <= 0; i++){
-		for(int j = 0; j <= 2; j++){
-			result.donnee[i][j] = 0;
-			for(int k = 0; k <= 2; i++){
-				result.donnee[i][j] = result.donnee[i][j] + (p.donnee[i][k] * m.donnee[k][j]);
-			}
-		}
-	}
+	result.donnee[0][0] = (m.donnee[0][0] * p.donnee[0][0]) + (m.donnee[1][0] * p.donnee[0][1]) + (m.donnee[2][0] * p.donnee[0][2]);
+	result.donnee[0][1] = (m.donnee[0][1] * p.donnee[0][0]) + (m.donnee[1][1] * p.donnee[0][1]) + (m.donnee[2][1] * p.donnee[0][2]);
+	result.donnee[0][2] = (m.donnee[0][2] * p.donnee[0][0]) + (m.donnee[1][2] * p.donnee[0][1]) + (m.donnee[2][2] * p.donnee[0][2]);
 	return result;
 }
 
@@ -74,18 +71,18 @@ point multiMatricePoint(matrice m, point p){
 	par rapport a l’origine d’un facteur 2 selon l’axe Ox et 3 selon 
 	l’axe Oy
 	---------
-	| 3 0 0 |
-	| 0 2 0 |
+	| 2 0 0 |
+	| 0 3 0 |
 	| 0 0 1 |
 	---------
 */
 matrice genereS(){
 	matrice m;
-	m.donnee[0][0] = 3;
+	m.donnee[0][0] = 2;
 	m.donnee[0][1] = 0;
 	m.donnee[0][2] = 0;
 	m.donnee[1][0] = 0;
-	m.donnee[1][1] = 2;
+	m.donnee[1][1] = 3;
 	m.donnee[1][2] = 0;
 	m.donnee[2][0] = 0;
 	m.donnee[2][1] = 0;
@@ -106,10 +103,10 @@ matrice genereR(){
 	m.donnee[0][0] = 0.5;
 	m.donnee[0][1] = sqrt(3)/2;
 	m.donnee[0][2] = 0;
-	m.donnee[1][0] = sqrt(3)/2;
+	m.donnee[1][0] = -sqrt(3)/2;
 	m.donnee[1][1] = 0.5;
 	m.donnee[1][2] = 0;
-	m.donnee[2][0] = 1 - (sqrt(3)/2);
+	m.donnee[2][0] = 1 + (sqrt(3)/2);
 	m.donnee[2][1] = 0.5 - sqrt(3);
 	m.donnee[2][2] = 1;
 	return m;
@@ -157,7 +154,9 @@ void Affichage(){
 	point B1 = B;
 	point C1 = C;
 	point D1 = D;
+	char c;
 
+	/* Polygone de Base */
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -172,10 +171,98 @@ void Affichage(){
 		glVertex2f(D1.donnee[0][0], D1.donnee[0][1]);
 	glEnd();
 	glFlush();
+
+	/* Polygone transformé avec S */
+	printf("\nRentrez Y pour afficher le polygone transformé avec S\n");
+	scanf("%d", &i);
+	A1 = multiMatricePoint(S, A);
+	B1 = multiMatricePoint(S, B);
+	C1 = multiMatricePoint(S, C);
+	D1 = multiMatricePoint(S, D);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glBegin(GL_POLYGON);
+		glVertex2f(A1.donnee[0][0], A1.donnee[0][1]);
+		glVertex2f(B1.donnee[0][0], B1.donnee[0][1]);
+		glVertex2f(C1.donnee[0][0], C1.donnee[0][1]);
+		glVertex2f(D1.donnee[0][0], D1.donnee[0][1]);
+	glEnd();
+	glFlush();
+
+	/* Polygone transformé avec R */
+	printf("\nRentrez Y pour afficher le polygone transformé avec R\n");
+	c = getchar();
+	scanf("%d", &i);
+	A1 = multiMatricePoint(R, A);
+	B1 = multiMatricePoint(R, B);
+	C1 = multiMatricePoint(R, C);
+	D1 = multiMatricePoint(R, D);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glBegin(GL_POLYGON);
+		glVertex2f(A1.donnee[0][0], A1.donnee[0][1]);
+		glVertex2f(B1.donnee[0][0], B1.donnee[0][1]);
+		glVertex2f(C1.donnee[0][0], C1.donnee[0][1]);
+		glVertex2f(D1.donnee[0][0], D1.donnee[0][1]);
+	glEnd();
+	glFlush();
+
+	/* Polygone transformé avec T */
+	printf("\nRentrez Y pour afficher le polygone transformé avec T\n");
+	c = getchar();
+	scanf("%d", &i);
+	A1 = multiMatricePoint(T, A);
+	B1 = multiMatricePoint(T, B);
+	C1 = multiMatricePoint(T, C);
+	D1 = multiMatricePoint(T, D);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glBegin(GL_POLYGON);
+		glVertex2f(A1.donnee[0][0], A1.donnee[0][1]);
+		glVertex2f(B1.donnee[0][0], B1.donnee[0][1]);
+		glVertex2f(C1.donnee[0][0], C1.donnee[0][1]);
+		glVertex2f(D1.donnee[0][0], D1.donnee[0][1]);
+	glEnd();
+	glFlush();
+
+	/* Polygone transformé équivalent a R suivi de T suivi de S */
+	printf("\nRentrez Y pour afficher le polygone transformé équivalent a R suivi de T suivi de S\n");
+	c = getchar();
+	scanf("%d", &i);
+	A1 = multiMatricePoint(T1, A);
+	B1 = multiMatricePoint(T1, B);
+	C1 = multiMatricePoint(T1, C);
+	D1 = multiMatricePoint(T1, D);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glBegin(GL_POLYGON);
+		glVertex2f(A1.donnee[0][0], A1.donnee[0][1]);
+		glVertex2f(B1.donnee[0][0], B1.donnee[0][1]);
+		glVertex2f(C1.donnee[0][0], C1.donnee[0][1]);
+		glVertex2f(D1.donnee[0][0], D1.donnee[0][1]);
+	glEnd();
+	glFlush();
+
+	/* Polygone transformé équivalent a R suivi de T suivi de S */
+	printf("\nRentrez Y pour afficher le polygone transformé équivalent a S suivi de T suivi de R\n");
+	c = getchar();
+	scanf("%d", &i);
+	A1 = multiMatricePoint(T2, A);
+	B1 = multiMatricePoint(T2, B);
+	C1 = multiMatricePoint(T2, C);
+	D1 = multiMatricePoint(T2, D);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glBegin(GL_POLYGON);
+		glVertex2f(A1.donnee[0][0], A1.donnee[0][1]);
+		glVertex2f(B1.donnee[0][0], B1.donnee[0][1]);
+		glVertex2f(C1.donnee[0][0], C1.donnee[0][1]);
+		glVertex2f(D1.donnee[0][0], D1.donnee[0][1]);
+	glEnd();
+	glFlush();
+
 }
 
 
 int main(int argc, char *argv[]){
+
+	matrice t1;
+	matrice t2;
 
 	if(argc != 2){
 		printf("\n\nUsage : ./Exercice2 [TaillePixel]\n\n");
@@ -192,6 +279,11 @@ int main(int argc, char *argv[]){
 	B = generePoint(3, 0);
 	C = generePoint(1, 2);
 	D = generePoint(-1, 3);
+	t1 = multiMatrice(R, T);
+	T1 = multiMatrice(t1, S);
+	t2 = multiMatrice(S, T);
+	T2 = multiMatrice(t2, R);
+
 
 	/* Initialisation de GLUT */
 	glutInit(&argc, argv);
