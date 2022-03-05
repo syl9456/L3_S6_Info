@@ -10,7 +10,7 @@ int main(int argc, char *argv[]){
 
 
 
-	karbre A = boule2arbre(1024, 1024, 1024, 5000);
+	karbre A = boule2arbre(200, 200, 2000, 1000);
 	
 	printf("\n\n");
 
