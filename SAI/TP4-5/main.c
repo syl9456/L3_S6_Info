@@ -8,16 +8,9 @@
 
 int main(int argc, char *argv[]){
 
-	karbre A1 = kConsArbre(0, kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide());
-	karbre A2 = kConsArbre(1, kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide());
-	karbre A3 = kConsArbre(1, kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide());
-	karbre A4 = kConsArbre(0, kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide());
-	karbre A5 = kConsArbre(0, kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide());
-	karbre A6 = kConsArbre(1, kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide());
-	karbre A7 = kConsArbre(0, kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide());
-	karbre A8 = kConsArbre(1, kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide(), kArbreVide());
 
-	karbre A = kConsArbre(0, A1, A2, A3, A4, A5, A6, A7, A8);
+
+	karbre A = boule2arbre(1024, 1024, 1024, 5000);
 	
 	printf("\n\n");
 

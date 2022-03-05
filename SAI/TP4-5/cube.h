@@ -1,7 +1,11 @@
+#ifndef CUBE_H
+#define CUBE_H
+
+#define PROFMAX 4
 
 typedef struct sommet{
 	int x, y, z;
-}point;
+}sommet;
 
 typedef struct cube{
 	sommet s1;
@@ -9,5 +13,7 @@ typedef struct cube{
 }cube;
 
 
-int contenueDansBoule(cube monCube, int Cx, int Cy, int Cz);
-int pasIntersecBoule(cube monCube, int Cx, int Cy, int Cz);
+int cubeContenueDansBoule(cube c, int Cx, int Cy, int Cz, int r);
+int cubePasContientBoule(cube c, int Cx, int Cy, int Cz, int r);
+
+#endif
