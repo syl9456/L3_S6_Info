@@ -24,5 +24,6 @@ void afficherKarbreProf(karbre A, int profondeur);
 karbre kConsArbre(element e, ...);
 karbre boule2arbre(int x, int y, int z, int r);
 karbre boule2arbre_bis(int x, int y, int z, int r, cube c, int prof);
+karbre intersection(karbre V1, karbre V2);
 
 #endif

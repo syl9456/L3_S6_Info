@@ -275,3 +275,32 @@ karbre boule2arbre(int x, int y, int z, int r){
                       boule2arbre_bis(x, y, z, r, c7, prof+1),
                       boule2arbre_bis(x, y, z, r, c8, prof+1));
 }
+
+
+karbre intersection(karbre V1, karbre V2){
+
+    if(V1 == NULL || V2 == NULL){
+        return NULL;
+    }
+    
+    if(!kEstVide(V1) && !kEstVide(V2)){
+        return kConsArbre(1, intersection(V1->fils[0], V2->fils[0]),
+                          intersection(V1->fils[1], V2->fils[1]),
+                          intersection(V1->fils[2], V2->fils[2]),
+                          intersection(V1->fils[3], V2->fils[3]),
+                          intersection(V1->fils[4], V2->fils[4]),
+                          intersection(V1->fils[5], V2->fils[5]),
+                          intersection(V1->fils[6], V2->fils[6]),
+                          intersection(V1->fils[7], V2->fils[7]));
+    }
+    else{
+        return kConsArbre(0, intersection(V1->fils[0], V2->fils[0]),
+                          intersection(V1->fils[1], V2->fils[1]),
+                          intersection(V1->fils[2], V2->fils[2]),
+                          intersection(V1->fils[3], V2->fils[3]),
+                          intersection(V1->fils[4], V2->fils[4]),
+                          intersection(V1->fils[5], V2->fils[5]),
+                          intersection(V1->fils[6], V2->fils[6]),
+                          intersection(V1->fils[7], V2->fils[7]));
+    }
+}
