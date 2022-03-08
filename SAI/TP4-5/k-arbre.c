@@ -7,15 +7,19 @@
 karbre kArbreVide(){
 	karbre monArbre;
     monArbre = (karbre)malloc(sizeof(noeud));
-    monArbre->donnee = 0;
+    monArbre->donnee = VIDE;
     return monArbre;
 }
 
 karbre kArbrePlein(){
     karbre monArbre;
     monArbre = (karbre)malloc(sizeof(noeud));
-    monArbre->donnee = 1;
+    monArbre->donnee = PLEIN;
     return monArbre;
+}
+
+karbre kArbreNull(){
+    return NULL;
 }
 
 karbre kFils(int ieme, karbre A){
@@ -32,7 +36,11 @@ element kRacine(karbre A){
 }
 
 int kEstVide(karbre A){
-	return A->donnee == 0;
+	return A->donnee == VIDE;
+}
+
+int kEstPlein(karbre A){
+    return A->donnee == PLEIN;
 }
 
 void kAfficher(karbre A){
@@ -56,8 +64,9 @@ void afficherKarbreProf(karbre A, int profondeur){
     }
     switch (A->donnee)
     {
-        case 0 : printf("VIDE\n") ; break ;
-        case 1 : printf("PLEIN\n") ; break ;
+        case VIDE : printf("VIDE\n") ; break ;
+        case PLEIN : printf("PLEIN\n") ; break ;
+        case COMPLEXE : printf("COMPLEXE\n") ; break ;
         default : printf("Je suis la et c'est pas normal\n"); break ;
     }
   
@@ -167,7 +176,7 @@ karbre boule2arbre_bis(int x, int y, int z, int r, cube c, int prof){
 
     /* On construit l'arbre récursivement : */
 
-    return kConsArbre(0, boule2arbre_bis(x, y, z, r, c1, prof+1),
+    return kConsArbre(COMPLEXE, boule2arbre_bis(x, y, z, r, c1, prof+1),
                       boule2arbre_bis(x, y, z, r, c2, prof+1),
                       boule2arbre_bis(x, y, z, r, c3, prof+1),
                       boule2arbre_bis(x, y, z, r, c4, prof+1),
@@ -266,7 +275,7 @@ karbre boule2arbre(int x, int y, int z, int r){
 
     /* On construit l'arbre récursivement : */
 
-    return kConsArbre(0, boule2arbre_bis(x, y, z, r, c1, prof+1),
+    return kConsArbre(COMPLEXE, boule2arbre_bis(x, y, z, r, c1, prof+1),
                       boule2arbre_bis(x, y, z, r, c2, prof+1),
                       boule2arbre_bis(x, y, z, r, c3, prof+1),
                       boule2arbre_bis(x, y, z, r, c4, prof+1),
@@ -277,30 +286,51 @@ karbre boule2arbre(int x, int y, int z, int r){
 }
 
 
+karbre copie(karbre A){
+
+    if(A->donnee == VIDE){
+        return kArbreVide();
+    }
+    if(A->donnee == PLEIN){
+        return kArbrePlein();
+    }
+
+    return kConsArbre(COMPLEXE, copie(A->fils[0]), 
+                                copie(A->fils[1]),
+                                copie(A->fils[2]),
+                                copie(A->fils[3]),
+                                copie(A->fils[4]),
+                                copie(A->fils[5]),
+                                copie(A->fils[6]),
+                                copie(A->fils[7]));
+}
+
+
 karbre intersection(karbre V1, karbre V2){
 
-    if(V1 == NULL || V2 == NULL){
-        return NULL;
+    if(kEstVide(V1) || kEstVide(V2)){
+        return kConsArbre(VIDE, kArbreNull(),
+                                kArbreNull(),
+                                kArbreNull(),
+                                kArbreNull(),
+                                kArbreNull(),
+                                kArbreNull(),
+                                kArbreNull(),
+                                kArbreNull());
     }
-    
-    if(!kEstVide(V1) && !kEstVide(V2)){
-        return kConsArbre(1, intersection(V1->fils[0], V2->fils[0]),
-                          intersection(V1->fils[1], V2->fils[1]),
-                          intersection(V1->fils[2], V2->fils[2]),
-                          intersection(V1->fils[3], V2->fils[3]),
-                          intersection(V1->fils[4], V2->fils[4]),
-                          intersection(V1->fils[5], V2->fils[5]),
-                          intersection(V1->fils[6], V2->fils[6]),
-                          intersection(V1->fils[7], V2->fils[7]));
+    if(kEstPlein(V1)){
+        return copie(V2);
     }
-    else{
-        return kConsArbre(0, intersection(V1->fils[0], V2->fils[0]),
-                          intersection(V1->fils[1], V2->fils[1]),
-                          intersection(V1->fils[2], V2->fils[2]),
-                          intersection(V1->fils[3], V2->fils[3]),
-                          intersection(V1->fils[4], V2->fils[4]),
-                          intersection(V1->fils[5], V2->fils[5]),
-                          intersection(V1->fils[6], V2->fils[6]),
-                          intersection(V1->fils[7], V2->fils[7]));
+    if(kEstPlein(V2)){
+        return copie(V1);
     }
+    return kConsArbre(COMPLEXE, intersection(V1->fils[0], V2->fils[0]),
+                                  intersection(V1->fils[1], V2->fils[1]),
+                                  intersection(V1->fils[2], V2->fils[2]),
+                                  intersection(V1->fils[3], V2->fils[3]),
+                                  intersection(V1->fils[4], V2->fils[4]),
+                                  intersection(V1->fils[5], V2->fils[5]),
+                                  intersection(V1->fils[6], V2->fils[6]),
+                                  intersection(V1->fils[7], V2->fils[7]));
 }
+

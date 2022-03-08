@@ -10,8 +10,8 @@ int main(int argc, char *argv[]){
 
 
 
-	karbre A1 = boule2arbre(200, 200, 2000, 1000);
-	karbre A2 = boule2arbre(100, 100, 2000, 1000);
+	karbre A1 = boule2arbre(512, 512, 512, 1000);
+	karbre A2 = boule2arbre(1024, 1024, 1024, 600);
 	karbre interA1A2;
 	
 	printf("\n\n");

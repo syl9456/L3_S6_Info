@@ -36,13 +36,12 @@ int cubePasContientBoule(cube c, int Cx, int Cy, int Cz, int r){
 						if((pow(c.s2.x - Cx, 2))+(pow(c.s1.y - Cy, 2))+(pow(c.s2.z - Cz, 2)) > pow(r, 2)){ /* Sommet 6 */
 							if((pow(c.s1.x - Cx, 2))+(pow(c.s1.y - Cy, 2))+(pow(c.s2.z - Cz, 2)) > pow(r, 2)){ /* Sommet 7 */
 								if((pow(c.s1.x - Cx, 2))+(pow(c.s2.y - Cy, 2))+(pow(c.s2.z - Cz, 2)) > pow(r, 2)){ /* Sommet 8 */
-									/* On test si le centre du cube est dans la sphere, si oui alors le cube enveloppe la sphere
-									   Sinon, le cube est en dehors de la sphère */
-									if((pow(((c.s1.x+c.s2.x)/2) - Cx, 2)) + (pow(((c.s1.y+c.s2.y)/2) - Cy, 2)) + (pow(((c.s1.z+c.s2.z)/2) - Cz, 2)) < pow(r, 2)){
-										return 0;
+									/* On test si c'est pas dans le cube */
+									if(Cx < c.s1.x - r || Cy < c.s1.y - r || Cz < c.s1.z - r || Cx > c.s2.x + r || Cy > c.s2.y + r || Cz > c.s2.z + r){
+										return 1;
 									}
 									else{
-										return 1;
+										return 0;
 									}
 								}
 							}

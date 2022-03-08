@@ -1,7 +1,7 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-#define PROFMAX 8
+#define PROFMAX 4
 
 typedef struct sommet{
 	int x, y, z;
