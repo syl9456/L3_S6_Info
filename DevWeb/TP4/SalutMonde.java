@@ -1,4 +1,4 @@
-package tchache;
+package tchatche;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
