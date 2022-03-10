@@ -5,6 +5,7 @@
 
 #define K 8
 #define N 11
+#define PROFMAX 3
 #define VIDE 0
 #define PLEIN 1
 #define COMPLEXE 2
@@ -24,12 +25,15 @@ element kRacine(karbre A);
 int kEstVide(karbre A);
 void kAfficher(karbre A);
 void afficherKarbreProf(karbre A, int profondeur);
+int kEstPlein(karbre A);
+karbre copie(karbre A);
+karbre kArbreNull();
 karbre kConsArbre(element e, ...);
 karbre boule2arbre(int x, int y, int z, int r);
 karbre boule2arbre_bis(int x, int y, int z, int r, cube c, int prof);
 karbre intersection(karbre V1, karbre V2);
-int kEstPlein(karbre A);
-karbre copie(karbre A);
-karbre kArbreNull();
+karbre paral2arbre(cube c);
+karbre paral2arbre_bis(cube cc, cube c, int prof);
+
 
 #endif
