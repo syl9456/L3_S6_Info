@@ -3,7 +3,6 @@ package tchatche;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -46,27 +45,38 @@ public class init extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ServletContext servletContext = request.getServletContext();
-		String Pseudo = request.getParameter("Pseudo");
-		HttpSession session = request.getSession(true);
-		session.setAttribute("Pseudo", Pseudo);
-		/* On récupère la HashTable des Utilisateur et */ /* On rajoute l'utilisateur */
-		Hashtable<String, Integer> tmpListeUtil = (Hashtable<String, Integer>) servletContext.getAttribute("listeUtil");
-		/* On rajoute l'utilisateur */
-		tmpListeUtil.put(Pseudo, 0);
-		/* On met a jour le context */
-		servletContext.setAttribute("listeUtil", tmpListeUtil);
-		 /* On redirige */
-		response.sendRedirect("tchatche.html");
+		HttpSession session = request.getSession();
+		/* On instancie la veriable de session pseudo le pseudo renseigné */
+	    session.setAttribute("Pseudo", request.getParameter("Pseudo"));
+	    response.sendRedirect("tchatche.html");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		HttpSession session = request.getSession();
+		
+		/* Instanciation de la liste de message si elle n'existe pas */
+	    if(getServletContext().getAttribute("listeMessage") == null){
+	    	ArrayList<Message> tmpListeMessage = new ArrayList<Message>();
+	    	getServletContext().setAttribute("listeMessage", tmpListeMessage);
+	    }
+	    
+	    /* Instanciation de la liste d'utilisateur si elle n'existe pas */
+	    if(getServletContext().getAttribute("listeUtil") == null){
+	    	Hashtable<String, Integer> tmpListUtil= new Hashtable<String, Integer>();
+	    	tmpListUtil.put(request.getParameter("Pseudo"), 0);
+	      	getServletContext().setAttribute("listeUtil", tmpListUtil);
+	    }
+	    else{
+	    	((Hashtable<String, Integer>)getServletContext().getAttribute("listeUtil")).put(request.getParameter("Pseudo"), 0);
+	    }
+	    /* On instancie la veriable de session pseudo le pseudo renseigné */
+	    session.setAttribute("Pseudo", request.getParameter("Pseudo"));
+	    response.sendRedirect("tchatche.html");
 	}
 
 }
