@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+	<display-name>Tchatche</display-name>
+	<servlet>
+       <servlet-name>init</servlet-name>
+       <servlet-class>tchatche.init</servlet-class>
+       <load-on-startup>1<load-on-startup>
+    </servlet>
+    <servlet>
+       <servlet-name>Tchatche</servlet-name>
+       <servlet-class>tchatche.Tchatche</servlet-class>
+       <load-on-startup>2<load-on-startup>
+    </servlet>
+    <servlet>
+       <servlet-name>Admin</servlet-name>
+       <servlet-class>tchatche.Admin</servlet-class>
+       <load-on-startup>3<load-on-startup>
+   </servlet>
+</web-app>
