@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,28 +26,13 @@ public class init extends HttpServlet {
 	public init() throws ServletException {
 		super();
 	}
-	
-	
-	public init(ServletConfig config) throws ServletException {
-        super.init(config);
-        ServletContext servletContext = this.getServletContext();
-        /* On déclare la liste des Utilisateur et des Messages et on les met dans le context */
-        ArrayList<Message> listeMessage = new ArrayList<Message>();
-        Hashtable<String, Integer> listeUtil = new Hashtable<String, Integer>();
-        /* On enregistre les 2 listes dans le context */
-        servletContext.setAttribute("listeMessage", listeMessage);
-        servletContext.setAttribute("listeUtil", listeUtil);
-        
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		/* On instancie la veriable de session pseudo le pseudo renseigné */
-	    session.setAttribute("Pseudo", request.getParameter("Pseudo"));
-	    response.sendRedirect("tchatche.html");
+		/* Redirection vers index */
+	    response.sendRedirect("index.html");
 	}
 
 	/**
@@ -76,6 +59,8 @@ public class init extends HttpServlet {
 	    }
 	    /* On instancie la veriable de session pseudo le pseudo renseigné */
 	    session.setAttribute("Pseudo", request.getParameter("Pseudo"));
+	    getServletContext().setAttribute("nbAffichages", 0);
+	    getServletContext().setAttribute("tailleDonnees", 0);
 	    response.sendRedirect("tchatche.html");
 	}
 

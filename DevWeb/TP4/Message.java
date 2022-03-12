@@ -1,5 +1,5 @@
 package tchatche;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Message {
 	
@@ -7,9 +7,9 @@ public class Message {
 	public static int nbMessages = 0;
 	public String Pseudo;
 	public String Texte;
-	public LocalDate dateMessage;
+	public LocalDateTime dateMessage;
 	
-	public Message(String P, String T, LocalDate D){
+	public Message(String P, String T, LocalDateTime D){
 		Pseudo = P;
 		Texte = T;
 		dateMessage = D;
