@@ -52,3 +52,22 @@ duplique([X|L1], N, K, [X|L2]) :-
     K1 is K-1,
     duplique([X|L1], N, K1, L2).
 
+compresse([X], [X]) :-
+    !. % CUT
+compresse([X,X|L1], L2) :-
+    !,  % CUT
+    compresse([X|L1], L2).
+compresse([X,Y|L1], [X|L2]) :-
+    X\==Y,
+    compresse([Y|L1], L2).
+
+split(L, 0, [], L).
+split([X|L1], N, [X|L2], L3) :-
+    split(L1, P, L2, L3),
+    N is P + 1.
+
+enleve_a(V, [V|L], 1, L) :- 
+    !. % CUT
+enleve_a(V, [VV|L1], K1, [VV|L2]) :-
+    K2 is K1-1,
+    enleve_a(V, L1, K2, L2).
