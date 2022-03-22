@@ -50,3 +50,30 @@ compte_feuilles(t(_,L,R),M) :-
     compte_feuilles(L,N),
     compte_feuilles(R,P),
     M is N+P.
+
+
+collecte_feuilles(nil, []).
+collecte_feuilles(t(V, nil, nil), [V]) :-
+    !. % CUT
+collecte_feuilles(t(_, Gauche, Droite), L) :-
+    collecte_feuilles(Gauche, LGauche),
+    collecte_feuilles(Droite, LDroite),
+    append(LGauche, LDroite, L).
+
+
+collecte_noeud_interne(nil, []).
+collecte_noeud_interne(t(_, nil, nil), []) :-
+    !. % CUT
+collecte_noeud_interne(t(V, Gauche, Droite), [V|L]) :-
+    collecte_noeud_interne(Gauche, LGauche),
+    collecte_noeud_interne(Droite, LDroite),
+    append(LGauche, LDroite, L).
+
+
+collecte_noeud_niveau(nil, [], _).
+collecte_noeud_niveau(t(V, Gauche, Droite), L, N) :-
+    N > 1,
+    N2 is N - 1,
+    collecte_noeud_niveau(Gauche, LGauche, N2),
+    collecte_noeud_niveau(Droite, LDroite, N2),
+    append(LGauche, LDroite, L).
