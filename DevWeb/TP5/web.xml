@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="4.0">
-	<infos>
-		<Update>
-			<Value>1</Value>
-		</Update>
-	</infos>
+	<context-param>
+        <param-name>Update</param-name>
+        <param-value>1</param-value>
+    </context-param>
 </web-app>
