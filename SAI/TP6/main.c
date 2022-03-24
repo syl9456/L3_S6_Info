@@ -10,7 +10,8 @@
 int sensRotation = 1;
 float angle = 0;
 float persoX, persoZ;
-karbre s1;
+karbre s1, s2, intersec;
+int mode = 0;
 
 void affiche_cube(int x1, int y1, int z1, int x2, int y2, int z2){
     glBegin(GL_QUADS);
@@ -110,6 +111,9 @@ void GererClavier(unsigned char touche, int x, int y){
 	if(touche == 'a'){
 		sensRotation = !sensRotation;
 	}
+	if(touche == 'z'){
+		mode = !mode;
+	}
 }
 
 
@@ -177,12 +181,21 @@ void MonAffichage(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glFrustum(-1, 1, -1, 1, 1, 10000);
+	glFrustum(-1, 1, -1, 1, 1, 3000);
 	gluLookAt(persoX, 1024, persoZ, 1024, 1024, 1024, 0, 1, 0);
 	/* Définition de la maison */
 	/*maison();*/
-	/*affiche_cube(-2, -2, -2, 2, 2, 2);*/
-	afficherKarbre3D(s1);
+	switch(mode){
+		case 0: /* Affiche 2 sphere */
+			afficherKarbre3D(s1);
+			afficherKarbre3D(s2);
+			break;
+		case 1: /* Affiche Intersection */
+			afficherKarbre3D(intersec);
+			break;
+		default:
+			break;
+	}
 	glutKeyboardFunc(GererClavier);
 	glutIdleFunc(Animer);
 	glRotatef(angle,0,0,1);
@@ -192,6 +205,17 @@ void MonAffichage(){
 
 
 int main(int argc, char *argv[]){
+
+	/* Test des paramètres */
+	if(argc != 1){
+		printf("\n\tUsage : ./tp3D\n");
+	}
+
+	printf("\n\n\tL'appuie sur la touche A permet de :\n");
+	printf("\t\tChanger le sens de rotation du(des) volumes\n");
+	printf("\tL'appuie sur la touche Z permet de switcher entre :\n");
+	printf("\t\t--> Affichez une boule de centre Ω1 et de rayon r1. Puis une boule de centre Ω2 et de rayon r2\n");
+	printf("\t\t--> Déclenchez la construction de l’intersection de ces deux boules, et affichez le résultat\n\n");
 
 	/* Initialisation de GLUT */
 	glutInit(&argc, argv);
@@ -207,9 +231,12 @@ int main(int argc, char *argv[]){
 	glutCreateWindow("TP6");
 	glEnable(GL_DEPTH_TEST);
 
-	/* On créer une sphère */
-	s1 = boule2arbre(1024, 1024, 1024, 512);
-	/*kAfficher(s1);*/
+	/* On créer 2 sphère */
+	s1 = boule2arbre(1024, 800, 1024, 500);
+	s2 = boule2arbre(1024, 1100, 1024, 500);
+
+	/* On créer l'intersection */
+	intersec = intersection(s1, s2);
 
 	/* On affiche */
 	glutDisplayFunc(MonAffichage);
