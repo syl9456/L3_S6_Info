@@ -10,64 +10,99 @@
 int sensRotation = 1;
 float angle = 0;
 float persoX, persoZ;
-
+karbre s1;
 
 void affiche_cube(int x1, int y1, int z1, int x2, int y2, int z2){
-	glBegin(GL_QUADS);
-		/* Base du cube */
-		glColor3f(0.9, 0.9, 0.9);
-		glVertex3f(x1, y1, z1);
-		glVertex3f(x1, y1, z2);
-		glVertex3f(x2, y1, z2);
-		glVertex3f(x2, y1, z1);
-		/* coté gauche du cube */
-		glColor3f(0.8, 0.8, 0.8);
-		glVertex3f(x1, y1, z1);
-		glVertex3f(x1, y2, z1);
-		glVertex3f(x1, y2, z2);
-		glVertex3f(x2, y1, z2);
-		/* coté droit du cube  */
-		glColor3f(0.7, 0.7, 0.7);
-		glVertex3f(x2, y1, z1);
-		glVertex3f(x2, y2, z1);
-		glVertex3f(x2, y2, z2);
-		glVertex3f(x2, y1, z2);
-		/* coté avant du cube  */
-		glColor3f(0.6, 0.6, 0.6);
-		glVertex3f(x1, y1, z1);
-		glVertex3f(x1, y2, z1);
-		glVertex3f(x2, y2, z1);
-		glVertex3f(x2, y1, z1);
-		/* coté arriere du cube  */
-		glColor3f(0.5, 0.5, 0.5);
-		glVertex3f(x1, y1, z2);
-		glVertex3f(x1, y2, z2);
-		glVertex3f(x2, y2, z2);
-		glVertex3f(x2, y1, z2);
-		/* coté au dessus du cube  */
-		glColor3f(0.4, 0.4, 0.4);
-		glVertex3f(x1, y2, z1);
-		glVertex3f(x1, y2, z2);
-		glVertex3f(x2, y2, z2);
-		glVertex3f(x2, y2, z1);
-	glEnd();
+    glBegin(GL_QUADS);
+      glColor3f(1,1,1);
+      //face bas
+      glVertex3f(x1,y1,z2);
+      glVertex3f(x2,y1,z2);
+      glVertex3f(x2,y2,z1);
+      glVertex3f(x1,y1,z1);
+
+      glColor3f(0.9,0.9,0.9);
+      //face dessus
+      glVertex3f(x1,y2,z2);
+      glVertex3f(x2,y2,z2);
+      glVertex3f(x2,y2,z1);
+      glVertex3f(x1,y2,z1);
+
+      //cotés
+      glColor3f(0.8,0.8,0.8);
+      //1
+      glVertex3f(x1,y2,z2);
+      glVertex3f(x2,y2,z2);
+      glVertex3f(x2,y1,z2);
+      glVertex3f(x1,y1,z2);
+
+      glColor3f(0.7,0.7,0.7);
+      //2
+      glVertex3f(x2,y1,z2);
+      glVertex3f(x2,y2,z2);
+      glVertex3f(x2,y2,z1);
+      glVertex3f(x2,y1,z1);
+
+      glColor3f(0.6,0.6,0.6);
+      //3
+      glVertex3f(x1,y1,z1);
+      glVertex3f(x2,y1,z1);
+      glVertex3f(x2,y2,z1);
+      glVertex3f(x1,y2,z1);
+      
+      glColor3f(0.5,0.5,0.5);
+      //3
+      glVertex3f(x1,y2,z2);
+      glVertex3f(x1,y1,z2);
+      glVertex3f(x1,y1,z1);
+      glVertex3f(x1,y2,z1);
+    glEnd();
 }
+
+void afficherKarbre3D(karbre A){
+
+    /* arbre vide ? */
+    if (A == NULL){
+        return;
+    }
+
+    switch (A->donnee)
+    {
+        case VIDE : break ;
+        case PLEIN :
+        	affiche_cube(A->c.s1.x,
+        				 A->c.s1.y,
+        				 A->c.s1.z,
+        				 A->c.s2.x,
+        				 A->c.s2.y,
+        				 A->c.s2.z); 
+        	break ;
+        case COMPLEXE : break ;
+        default : printf("Je suis la et c'est pas normal\n"); break ;
+    }
+  
+    /* Affichage des fils*/
+    for(int y = 0; y < K; y++){
+    	afficherKarbre3D(A->fils[y]);
+    }
+}
+
 
 void Animer(){
 	if(sensRotation){
-		angle += 0.0001;
+		angle += 0.01;
 		if (angle > 360) 
 			angle = 0;
 		glutPostRedisplay();
 	}
 	else{
-		angle -= 0.0001;
+		angle -= 0.01;
 		if (angle < 0) 
 			angle = 360;
 		glutPostRedisplay();
 	}
-	persoX = 15 * cos(angle);
-	persoZ = 15 * sin(angle);
+	persoX = 2048 * cos(angle);
+	persoZ = 2048 * sin(angle);
 }
 
 void GererClavier(unsigned char touche, int x, int y){
@@ -142,11 +177,12 @@ void MonAffichage(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glFrustum(-1, 1, -1, 1, 5, 100);
-	gluLookAt(persoX, 5, persoZ, 0, 0, 0, 0, 1, 0);
+	glFrustum(-1, 1, -1, 1, 1, 10000);
+	gluLookAt(persoX, 1024, persoZ, 1024, 1024, 1024, 0, 1, 0);
 	/* Définition de la maison */
 	/*maison();*/
-	affiche_cube(-2, -2, -2, 2, 2, 2);
+	/*affiche_cube(-2, -2, -2, 2, 2, 2);*/
+	afficherKarbre3D(s1);
 	glutKeyboardFunc(GererClavier);
 	glutIdleFunc(Animer);
 	glRotatef(angle,0,0,1);
@@ -168,8 +204,12 @@ int main(int argc, char *argv[]){
 	glutInitWindowPosition(50, 50);
 
 	/* Creation de la fenêtre */
-	glutCreateWindow("Maison");
+	glutCreateWindow("TP6");
 	glEnable(GL_DEPTH_TEST);
+
+	/* On créer une sphère */
+	s1 = boule2arbre(1024, 1024, 1024, 512);
+	/*kAfficher(s1);*/
 
 	/* On affiche */
 	glutDisplayFunc(MonAffichage);

@@ -3,18 +3,22 @@
 #include <stdarg.h>
 #include "k-arbre.h"
 #include "cube.h"
+#include "GL/gl.h"
+#include "GL/glut.h"
 
-karbre kArbreVide(){
+karbre kArbreVide(cube c){
 	karbre monArbre;
     monArbre = (karbre)malloc(sizeof(noeud));
     monArbre->donnee = VIDE;
+    monArbre->c = c;
     return monArbre;
 }
 
-karbre kArbrePlein(){
+karbre kArbrePlein(cube c){
     karbre monArbre;
     monArbre = (karbre)malloc(sizeof(noeud));
     monArbre->donnee = PLEIN;
+    monArbre->c = c;
     return monArbre;
 }
 
@@ -33,6 +37,10 @@ karbre kFils(int ieme, karbre A){
 
 element kRacine(karbre A){
 	return A->donnee;
+}
+
+cube kCube(karbre A){
+    return A->c;
 }
 
 int kEstVide(karbre A){
@@ -106,13 +114,13 @@ karbre boule2arbre_bis(int x, int y, int z, int r, cube c, int prof){
     cube c8;
 
     if(cubeContenueDansBoule(c, x, y, z, r)){
-        return kArbrePlein();
+        return kArbrePlein(c);
     }
     if(cubePasContientBoule(c, x, y, z, r)){
-        return kArbreVide();
+        return kArbreVide(c);
     }
     if(prof == PROFMAX){
-        return kArbreVide();
+        return kArbreVide(c);
     }
 
     /* On créer les 8 petit cube */
@@ -208,10 +216,10 @@ karbre boule2arbre(int x, int y, int z, int r){
 
 
     if(cubeContenueDansBoule(c, x, y, z, r)){
-        return kArbrePlein();
+        return kArbrePlein(c);
     }
     if(cubePasContientBoule(c, x, y, z, r)){
-        return kArbreVide();
+        return kArbreVide(c);
     }
 
     /* On créer les 8 petit cube */
@@ -289,10 +297,10 @@ karbre boule2arbre(int x, int y, int z, int r){
 karbre copie(karbre A){
 
     if(A->donnee == VIDE){
-        return kArbreVide();
+        return kArbreVide(A->c);
     }
     if(A->donnee == PLEIN){
-        return kArbrePlein();
+        return kArbrePlein(A->c);
     }
 
     return kConsArbre(COMPLEXE, copie(A->fils[0]), 
@@ -354,13 +362,13 @@ karbre paral2arbre_bis(cube cc, cube c, int prof){
 
 
     if(cubeContenueDansParal(cc, c)){
-        return kArbrePlein();
+        return kArbrePlein(c);
     }
     if(cubePasContientParal(cc, c)){
-        return kArbreVide();
+        return kArbreVide(c);
     }
     if(prof == PROFMAX){
-        return kArbreVide();
+        return kArbreVide(c);
     }
 
     /* On créer les 8 petit cube */
@@ -457,10 +465,10 @@ karbre paral2arbre(cube cc){
 
 
     if(cubeContenueDansParal(cc, c)){
-        return kArbrePlein();
+        return kArbrePlein(c);
     }
     if(cubePasContientParal(cc, c)){
-        return kArbreVide();
+        return kArbreVide(c);
     }
 
     /* On créer les 8 petit cube */

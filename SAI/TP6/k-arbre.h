@@ -5,7 +5,7 @@
 
 #define K 8
 #define N 11
-#define PROFMAX 3
+#define PROFMAX 9
 #define VIDE 0
 #define PLEIN 1
 #define COMPLEXE 2
@@ -14,6 +14,7 @@ typedef int element;
 
 typedef struct noeud{
 	element donnee;
+	cube c;
 	struct noeud *fils[K];
 }noeud;
 typedef noeud *karbre;
