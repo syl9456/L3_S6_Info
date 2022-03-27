@@ -12,24 +12,13 @@
 <title>Tchatche</title>
 </head>
 <body>
-	<%int Update = Integer.parseInt(pageContext.getServletContext().getInitParameter("Update"));%>
 	<h1>Bonjour <%=request.getSession().getAttribute("Pseudo")%></h1>
 	<p>
 	<%
 		if(pageContext.getServletContext().getAttribute("listeMessage") != null){
-			ArrayList<Message> tmpListeMessage = (ArrayList<Message>)pageContext.getServletContext().getAttribute("listeMessage");
-			for(int i = 0; i < tmpListeMessage.size(); i++) {
-				String ligne = "[";
-				ligne += tmpListeMessage.get(i).dateMessage.getHour() + ":";
-				ligne += tmpListeMessage.get(i).dateMessage.getMinute() + ":";
-				ligne += tmpListeMessage.get(i).dateMessage.getSecond() + "]";
-				ligne += " " + tmpListeMessage.get(i).Pseudo;
-				ligne += " : " + tmpListeMessage.get(i).Texte;
-				%><%=ligne %><br><%
-			}
+			%><jsp:forward page="affichage.jsp" /><%
 		}
 	%>
 	</p>
-	<%response.setIntHeader("Refresh", Update);%>
 </body>
 </html>

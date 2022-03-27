@@ -12,18 +12,14 @@
 <title>Tchatche</title>
 </head>
 <body>
-	<%if(pageContext.getServletContext().getAttribute("listeMessage") == null){
-		pageContext.getServletContext().setAttribute("listeMessage", new ArrayList<Message>());
-	}
-	else{
-		ArrayList<Message> tmpListeMessage = (ArrayList<Message>)pageContext.getServletContext().getAttribute("listeMessage");
+	<jsp:useBean id="gestMess" class ="tchatche.GestionMessages" scope="session"/>
+	<%
 		String textMessage = request.getParameter("Message");
 		String Pseudo = (String)session.getAttribute("Pseudo");
 		LocalDateTime maintenant = LocalDateTime.now();
 		Message mess = new Message(Pseudo, textMessage, maintenant);
-		tmpListeMessage.add(mess);
-		pageContext.getServletContext().setAttribute("listeMessage", tmpListeMessage);
-	}%>
-	<jsp:forward page="tchatche.html"></jsp:forward>
+		pageContext.getServletContext().setAttribute("listeMessage", (ArrayList<Message>)gestMess.ajouteMessage(mess, (ArrayList<Message>)pageContext.getServletContext().getAttribute("listeMessage")));
+		response.sendRedirect("tchatche.html");%>
+	
 </body>
 </html>
