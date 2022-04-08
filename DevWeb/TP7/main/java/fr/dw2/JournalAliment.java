@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class JournalAliment {
 	
 	private String Nom;
-	private static ArrayList<Portion> listePortion;
+	private ArrayList<Portion> listePortion;
 	
 	public JournalAliment() {
 		this.listePortion = new ArrayList<Portion>();
