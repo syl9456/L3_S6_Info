@@ -59,7 +59,7 @@ public class Utilisateur {
 
     /**
      * @param o
-     * @return Test si un Utilisateur est le meme qu'un autre
+     * @return Test si un Utilisateur est le même qu'un autre
      */
     @Override
     public boolean equals(Object o) {

@@ -67,7 +67,7 @@ public class Donnee {
 
     /**
      * @param o
-     * @return Test si une Donnee est la meme qu'une autre
+     * @return Test si une Donnee est la même qu'une autre
      */
     @Override
     public boolean equals(Object o) {

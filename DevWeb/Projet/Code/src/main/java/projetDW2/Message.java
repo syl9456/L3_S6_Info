@@ -47,7 +47,7 @@ public class Message {
 
     /**
      * @param o
-     * @return test si un Message est le meme qu'un autre
+     * @return test si un Message est le même qu'un autre
      */
     @Override
     public boolean equals(Object o) {

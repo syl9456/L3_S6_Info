@@ -21,6 +21,8 @@ public class Map {
         this.SrcBackground = srcbackground;
         nbMap++;
         this.ID = nbMap;
+        ListeDonnee = new ArrayList<Donnee>();
+        UtilAcces = new Hashtable<Integer, Integer>();
     }
 
     public int getID() {
@@ -77,7 +79,7 @@ public class Map {
 
     /**
      * @param o
-     * @return Test si une map est la meme qu'une autre
+     * @return Test si une map est la même qu'une autre
      */
     @Override
     public boolean equals(Object o) {
@@ -93,7 +95,7 @@ public class Map {
     @Override
     public String toString() {
         String lDonnee = "";
-        for (Donnee d : ListeDonnee) {
+        for(Donnee d : ListeDonnee){
             lDonnee += d.toString();
         }
         return "Map{" +

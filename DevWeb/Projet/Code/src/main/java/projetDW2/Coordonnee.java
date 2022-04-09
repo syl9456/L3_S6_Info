@@ -30,7 +30,7 @@ public class Coordonnee {
 
     /**
      * @param o
-     * @return Test si une coordonnee est la meme qu'une autre
+     * @return Test si une coordonnée est la même qu'une autre
      */
     @Override
     public boolean equals(Object o) {
