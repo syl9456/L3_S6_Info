@@ -34,7 +34,7 @@ char s[50];
 int h,w;
 /***************************************************************/
 
-void dessinerBonhommeNeige() {
+void dessinerMaison() {
 
 	glBegin(GL_QUADS);
 		/* Base de la maison */
@@ -82,7 +82,7 @@ void dessinerBonhommeNeige() {
 	glEnd();
 }
 
-void renderBitmapString(
+void stringFpsToBitmap(
 		float x,
 		float y,
 		float z,
@@ -100,7 +100,7 @@ void renderBitmapString(
 //             SOURIS
 // -----------------------------------
 
-void mouseButton(int button, int state, int x, int y) {
+void bouttonSouris(int button, int state, int x, int y) {
 
 	// démarrer UN mouvement uniquement si le bouton gauche de la souris est pressé
 	if (button == GLUT_LEFT_BUTTON) {
@@ -116,7 +116,7 @@ void mouseButton(int button, int state, int x, int y) {
 	}
 }
 
-void mouseMove(int x, int y) {
+void mouvementSouris(int x, int y) {
 
 	// Si le bouton gauche est enfoncé.
 	if (xOrigin >= 0) {
@@ -130,7 +130,7 @@ void mouseMove(int x, int y) {
 	}
 }
 
-void changeSize(int ww, int hh) {
+void changementTaille(int ww, int hh) {
 
 	h = hh;
 	w = ww;
@@ -161,13 +161,13 @@ void changeSize(int ww, int hh) {
 //             KEYBOARD
 // -----------------------------------
 
-void processNormalKeys(unsigned char key, int xx, int yy) { 	
+void appuieLettreClavier(unsigned char key, int xx, int yy) { 	
 
         if (key == 'x')
               exit(0);
 } 
 
-void pressKey(int key, int xx, int yy) {
+void appuieToucheClavier(int key, int xx, int yy) {
 
 	switch (key) {
 		case GLUT_KEY_LEFT : deltaAngle = -0.01f; break;
@@ -177,7 +177,7 @@ void pressKey(int key, int xx, int yy) {
 	}
 }
 
-void releaseKey(int key, int x, int y) {
+void relachementToucheClavier(int key, int x, int y) {
 
 	switch (key) {
 		case GLUT_KEY_LEFT :
@@ -215,25 +215,25 @@ void setOrthographicProjection() {
 	glMatrixMode(GL_MODELVIEW);
 }
 
-void computePos(float deltaMove) {
+void calculPosCamera(float deltaMove) {
 
 	x += deltaMove * lx * 0.1f;
 	z += deltaMove * lz * 0.1f;
 }
 
-void computeDir(float deltaAngle) {
+void calculDirCamera(float deltaAngle) {
 
 	angle += deltaAngle;
 	lx = sin(angle);
 	lz = -cos(angle);
 }
 
-void renderScene(void) {
+void construireMonde(void) {
 
 	if (deltaMove)
-		computePos(deltaMove);
+		calculPosCamera(deltaMove);
 	if (deltaAngle)
-		computeDir(deltaAngle);
+		calculDirCamera(deltaAngle);
 
 	// on clear les buffer de couleur et de profondeur
 
@@ -260,7 +260,7 @@ void renderScene(void) {
 		for(int j=-3; j < 3; j++) {
 			glPushMatrix();
 			glTranslatef(i*20.0,0,j * 20.0);
-			dessinerBonhommeNeige();
+			dessinerMaison();
 			glPopMatrix();
 		}
 	}
@@ -281,7 +281,7 @@ void renderScene(void) {
 
 	glPushMatrix();
 	glLoadIdentity();
-	renderBitmapString(5,30,0,GLUT_BITMAP_HELVETICA_18,s);
+	stringFpsToBitmap(5,30,0,GLUT_BITMAP_HELVETICA_18,s);
 	glPopMatrix();
 
 	restorePerspectiveProjection();
@@ -296,7 +296,7 @@ void renderScene(void) {
 // -----------------------------------
 
 
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
 
 	// Initialise GLUT et créer la fenêtre
 	glutInit(&argc, argv);
@@ -306,19 +306,19 @@ int main(int argc, char **argv) {
 	glutCreateWindow("Projet SAI");
 
 	// On enregistre les callbacks
-	glutDisplayFunc(renderScene);
-	glutReshapeFunc(changeSize);
-	glutIdleFunc(renderScene);
+	glutDisplayFunc(construireMonde);
+	glutReshapeFunc(changementTaille);
+	glutIdleFunc(construireMonde);
 
 	// Gestion du clavier
 	glutIgnoreKeyRepeat(1);
-	glutKeyboardFunc(processNormalKeys);
-	glutSpecialFunc(pressKey);
-	glutSpecialUpFunc(releaseKey);
+	glutKeyboardFunc(appuieLettreClavier);
+	glutSpecialFunc(appuieToucheClavier);
+	glutSpecialUpFunc(relachementToucheClavier);
 
 	// Gestion de la souris
-	glutMouseFunc(mouseButton);
-	glutMotionFunc(mouseMove);
+	glutMouseFunc(bouttonSouris);
+	glutMotionFunc(mouvementSouris);
 
 	// OpenGL initialisation
 	glEnable(GL_DEPTH_TEST);
