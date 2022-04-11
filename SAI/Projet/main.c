@@ -3,23 +3,25 @@
 #include <stdarg.h>
 #include "k-arbre.h"
 #include "cube.h"
-#include "vector.h"
 #include "math.h"
+#include "formes.h"
 #include "GL/gl.h"
 #include "GL/glut.h"
 
 /****************************************************************/
 // angle de rotation de la direction de la caméra
-float angle=0.0;
+float angleXZ=0.0f;
+float angleY=0.0f;
 
 // vecteur représentant la direction de la caméra
-float lx=0.0f,lz=-1.0f;
+float lx=0.0f, ly = 1.0f, lz=-1.0f;
 
 // XZ position of the camera
-float x=0.0f,z=5.0f;
+float x=0.0f, y=1.0f, z=5.0f;
 
 // Les états des touches. Initialisé a zéro quand aucune touche n'est pressée
-float deltaAngle = 0.0f;
+float deltaAngleXZ = 0.0f;
+float deltaAngleY = 0.0f;
 float deltaMove = 0;
 
 // Une variable pour stocker la position X où la souris est cliquée.
@@ -34,53 +36,6 @@ char s[50];
 int h,w;
 /***************************************************************/
 
-void dessinerMaison() {
-
-	glBegin(GL_QUADS);
-		/* Base de la maison */
-		glColor3f(0.9, 0.9, 0.9);
-		glVertex3f(0-5, 0-5, 0-5);
-		glVertex3f(0-5, 0-5, 10-5);
-		glVertex3f(10-5, 0-5, 10-5);
-		glVertex3f(10-5, 0-5, 0-5);
-		/* mur devant */
-		glColor3f(0.8, 0.8, 0.8);
-		glVertex3f(0-5, 0-5, 0-5);
-		glVertex3f(0-5, 10-5, 0-5);
-		glVertex3f(10-5, 10-5, 0-5);
-		glVertex3f(10-5, 0-5, 0-5);
-		/* mur gauche */
-		glColor3f(0.7, 0.7, 0.7);
-		glVertex3f(0-5, 0-5, 0-5);
-		glVertex3f(0-5, 10-5, 0-5);
-		glVertex3f(0-5, 10-5, 10-5);
-		glVertex3f(0-5, 0-5, 10-5);
-		/* mur droit */
-		glColor3f(0.6, 0.6, 0.6);
-		glVertex3f(10-5, 0-5, 0-5);
-		glVertex3f(10-5, 10-5, 0-5);
-		glVertex3f(10-5, 10-5, 10-5);
-		glVertex3f(10-5, 0-5, 10-5);
-		/* mur derriere */
-		glColor3f(0.5, 0.5, 0.5);
-		glVertex3f(0-5, 0-5, 10-5);
-		glVertex3f(0-5, 10-5, 10-5);
-		glVertex3f(10-5, 10-5, 10-5);
-		glVertex3f(10-5, 0-5, 10-5);
-		/* toiture droite */
-		glColor3f(0, 0.2, 0.5);
-		glVertex3f(10-5, 10-5, 0-5);
-		glVertex3f(5-5, 15-5, 0-5);
-		glVertex3f(5-5, 15-5, 10-5);
-		glVertex3f(10-5, 10-5, 10-5);
-		/* toiture gauche */
-		glColor3f(0, 0.2, 0.5);
-		glVertex3f(0-5, 10-5, 0-5);
-		glVertex3f(5-5, 15-5, 0-5);
-		glVertex3f(5-5, 15-5, 10-5);
-		glVertex3f(0-5, 10-5, 10-5);
-	glEnd();
-}
 
 void stringFpsToBitmap(
 		float x,
@@ -103,7 +58,7 @@ void stringFpsToBitmap(
 void bouttonSouris(int button, int state, int x, int y) {
 
 	// démarrer UN mouvement uniquement si le bouton gauche de la souris est pressé
-	if (button == GLUT_LEFT_BUTTON) {
+	/*if (button == GLUT_LEFT_BUTTON) {
 
 		// Lorsque le bouton est relâché
 		if (state == GLUT_UP) {
@@ -113,13 +68,13 @@ void bouttonSouris(int button, int state, int x, int y) {
 		else  {// Etat  = GLUT_DOWN
 			xOrigin = x;
 		}
-	}
+	}*/
 }
 
 void mouvementSouris(int x, int y) {
 
 	// Si le bouton gauche est enfoncé.
-	if (xOrigin >= 0) {
+	/*if (xOrigin >= 0) {
 
 		// Update deltaAngle
 		deltaAngle = (x - xOrigin) * 0.001f;
@@ -127,7 +82,7 @@ void mouvementSouris(int x, int y) {
 		// Update la Direction de la Caméra
 		lx = sin(angle + deltaAngle);
 		lz = -cos(angle + deltaAngle);
-	}
+	}*/
 }
 
 void changementTaille(int ww, int hh) {
@@ -163,17 +118,39 @@ void changementTaille(int ww, int hh) {
 
 void appuieLettreClavier(unsigned char key, int xx, int yy) { 	
 
-        if (key == 'x')
-              exit(0);
+	switch(key){
+		case 'x' :
+			exit(0);
+			break;
+		case 'z' :
+			deltaMove = 0.5f;
+			break;
+		case 's' :
+			deltaMove = -0.5f;
+			break;
+	}
+       
 } 
 
 void appuieToucheClavier(int key, int xx, int yy) {
 
 	switch (key) {
-		case GLUT_KEY_LEFT : deltaAngle = -0.01f; break;
-		case GLUT_KEY_RIGHT : deltaAngle = 0.01f; break;
-		case GLUT_KEY_UP : deltaMove = 0.5f; break;
-		case GLUT_KEY_DOWN : deltaMove = -0.5f; break;
+		case GLUT_KEY_LEFT : 
+			deltaAngleXZ = -0.02f; 
+			angleXZ += deltaAngleXZ; 
+			break;
+		case GLUT_KEY_RIGHT :
+			deltaAngleXZ = 0.02f; 
+			angleXZ += deltaAngleXZ; 
+			break;
+		case GLUT_KEY_UP : 
+			deltaAngleY = 0.02f; 
+			angleY += deltaAngleY; 
+			break;
+		case GLUT_KEY_DOWN : 
+			deltaAngleY = -0.02f; 
+			angleY += deltaAngleY; 
+			break;
 	}
 }
 
@@ -181,9 +158,10 @@ void relachementToucheClavier(int key, int x, int y) {
 
 	switch (key) {
 		case GLUT_KEY_LEFT :
-		case GLUT_KEY_RIGHT : deltaAngle = 0.0f;break;
+		case GLUT_KEY_RIGHT : deltaAngleXZ = 0.0f;break;
 		case GLUT_KEY_UP :
-		case GLUT_KEY_DOWN : deltaMove = 0;break;
+		case GLUT_KEY_DOWN : deltaAngleY = 0.0f;break;
+		case 122 : deltaMove = 0.0f; break;
 	}
 }
 
@@ -221,19 +199,19 @@ void calculPosCamera(float deltaMove) {
 	z += deltaMove * lz * 0.1f;
 }
 
-void calculDirCamera(float deltaAngle) {
+void calculDirCamera() {
 
-	angle += deltaAngle;
-	lx = sin(angle);
-	lz = -cos(angle);
+	lx = cos(angleXZ) * cos(angleY);
+	ly = sin(angleY);
+	lz = sin(angleXZ) * cos(angleY);
 }
 
 void construireMonde(void) {
 
 	if (deltaMove)
 		calculPosCamera(deltaMove);
-	if (deltaAngle)
-		calculDirCamera(deltaAngle);
+	if (deltaAngleXZ || deltaAngleY)
+		calculDirCamera();
 
 	// on clear les buffer de couleur et de profondeur
 
@@ -243,7 +221,7 @@ void construireMonde(void) {
 	glLoadIdentity();
 	// On setup la caméra comme vue en TP
 	gluLookAt(	x, 1.0f, z,
-			x+lx, 1.0f,  z+lz,
+			x+lx, y+ly,  z+lz,
 			0.0f, 1.0f,  0.0f);
 
         // On déssine un sol a la hauteur 0
@@ -261,6 +239,15 @@ void construireMonde(void) {
 			glPushMatrix();
 			glTranslatef(i*20.0,0,j * 20.0);
 			dessinerMaison();
+			glPopMatrix();
+		}
+	}
+
+	for(int i = -3; i < 3; i++){
+		for(int j=-3; j < 3; j++) {
+			glPushMatrix();
+			glTranslatef(i*30.0,0,j * 30.0);
+			dessinerArbre(2, 7);
 			glPopMatrix();
 		}
 	}
@@ -311,7 +298,7 @@ int main(int argc, char *argv[]) {
 	glutIdleFunc(construireMonde);
 
 	// Gestion du clavier
-	glutIgnoreKeyRepeat(1);
+	//glutIgnoreKeyRepeat(1);
 	glutKeyboardFunc(appuieLettreClavier);
 	glutSpecialFunc(appuieToucheClavier);
 	glutSpecialUpFunc(relachementToucheClavier);
