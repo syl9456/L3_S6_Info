@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css?family=Varela+Round");
+
+body, html {
+    background: #1c1d22;
+    font-family: "Varela Round", sans-serif;
+}
+
+.Menu {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.Menu * {
+    box-sizing: border-box;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
+}
+.Menu li {
+    display: inline-block;
+    list-style: outside none none;
+    margin: 0 1.5em;
+    overflow: hidden;
+}
+.Menu a {
+    padding: 0.3em 0;
+    color: cornsilk;
+    position: relative;
+    display: inline-block;
+    letter-spacing: 1px;
+    margin: 0;
+    text-decoration: none;
+}
+.Menu a:before,
+.Menu a:after {
+    position: absolute;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
+}
+.Menu a:before {
+    bottom: 100%;
+    display: block;
+    height: 3px;
+    width: 100%;
+    content: "";
+    background-color: #e67e22;
+}
+.Menu a:after {
+    padding: 0.3em 0;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    content: attr(data-hover);
+    color: cornsilk;
+    white-space: nowrap;
+}
+.Menu li:hover a,
+.Menu .current a {
+    transform: translateY(100%);
+}
+
+.Logo{
+    height: 100px;
+    width: 300px;
+    position : fixed;
+    left : 10px;
+    top : 10px;
+}
