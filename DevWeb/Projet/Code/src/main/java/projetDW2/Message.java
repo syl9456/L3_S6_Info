@@ -4,17 +4,22 @@ import java.util.Objects;
 
 public class Message {
 
+    private static int nbMess = 0;
     private int ID;
     private int IDAuteur;
+    private String PseudoAuteur;
     private String Text;
 
-    private static int nbMess = 0;
-
-    public Message(int IDAuteur, String text) {
+    public Message(int IDAuteur, String text, String PsAu) {
         this.IDAuteur = IDAuteur;
         this.Text = text;
+        this.PseudoAuteur = PsAu;
         nbMess++;
         this.ID = nbMess;
+    }
+
+    public static int getNbMess() {
+        return nbMess;
     }
 
     public int getID() {
@@ -33,16 +38,20 @@ public class Message {
         this.IDAuteur = IDAuteur;
     }
 
+    public String getPseudoAuteur() {
+        return PseudoAuteur;
+    }
+
+    public void setPseudoAuteur(String pseudoAuteur) {
+        PseudoAuteur = pseudoAuteur;
+    }
+
     public String getText() {
         return Text;
     }
 
     public void setText(String text) {
         Text = text;
-    }
-
-    public static int getNbMess() {
-        return nbMess;
     }
 
     /**
@@ -54,7 +63,7 @@ public class Message {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Message message = (Message) o;
-        return ID == message.ID && IDAuteur == message.IDAuteur && Objects.equals(Text, message.Text);
+        return ID == message.ID && IDAuteur == message.IDAuteur && Objects.equals(PseudoAuteur, message.PseudoAuteur) && Objects.equals(Text, message.Text);
     }
 
     /**
@@ -65,6 +74,7 @@ public class Message {
         return "Message{" +
                 "ID=" + ID +
                 ", IDAuteur=" + IDAuteur +
+                ", PseudoAuteur=" + PseudoAuteur +
                 ", Text='" + Text + '\'' +
                 '}';
     }

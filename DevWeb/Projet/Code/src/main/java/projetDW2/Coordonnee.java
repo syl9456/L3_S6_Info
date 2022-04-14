@@ -1,7 +1,5 @@
 package projetDW2;
 
-import java.util.Objects;
-
 public class Coordonnee {
 
     private int X;

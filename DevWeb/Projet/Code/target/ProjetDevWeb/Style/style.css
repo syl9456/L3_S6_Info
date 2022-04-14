@@ -10,17 +10,20 @@ body, html {
     text-transform: uppercase;
     font-weight: 500;
 }
+
 .Menu * {
     box-sizing: border-box;
     -webkit-transition: all 0.35s ease;
     transition: all 0.35s ease;
 }
+
 .Menu li {
     display: inline-block;
     list-style: outside none none;
     margin: 0 1.5em;
     overflow: hidden;
 }
+
 .Menu a {
     padding: 0.3em 0;
     color: cornsilk;
@@ -30,12 +33,14 @@ body, html {
     margin: 0;
     text-decoration: none;
 }
+
 .Menu a:before,
 .Menu a:after {
     position: absolute;
     -webkit-transition: all 0.35s ease;
     transition: all 0.35s ease;
 }
+
 .Menu a:before {
     bottom: 100%;
     display: block;
@@ -44,6 +49,7 @@ body, html {
     content: "";
     background-color: #e67e22;
 }
+
 .Menu a:after {
     padding: 0.3em 0;
     position: absolute;
@@ -53,15 +59,28 @@ body, html {
     color: cornsilk;
     white-space: nowrap;
 }
+
 .Menu li:hover a,
 .Menu .current a {
     transform: translateY(100%);
 }
 
-.Logo{
+.Logo {
     height: 100px;
     width: 300px;
-    position : fixed;
-    left : 10px;
-    top : 10px;
+    position: fixed;
+    left: 10px;
+    top: 10px;
+}
+
+.tchat{
+    position: fixed;
+    left: 200px;
+    top: 250px;
+}
+
+.saisie{
+    position: fixed;
+    bottom: 10px;
+    left: 200px;
 }

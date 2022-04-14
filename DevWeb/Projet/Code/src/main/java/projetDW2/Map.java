@@ -6,14 +6,13 @@ import java.util.Objects;
 
 public class Map {
 
+    private static int nbMap = 0;
     private int ID;
     private int IDProprio;
     private String Nom;
     private String SrcBackground;
     private ArrayList<Donnee> ListeDonnee;
     private Hashtable<Integer, Integer> UtilAcces;
-
-    private static int nbMap = 0;
 
     public Map(int IDProprio, String nom, String srcbackground) {
         this.IDProprio = IDProprio;
@@ -23,6 +22,10 @@ public class Map {
         this.ID = nbMap;
         ListeDonnee = new ArrayList<Donnee>();
         UtilAcces = new Hashtable<Integer, Integer>();
+    }
+
+    public static int getNbMap() {
+        return nbMap;
     }
 
     public int getID() {
@@ -73,10 +76,6 @@ public class Map {
         UtilAcces = utilAcces;
     }
 
-    public static int getNbMap() {
-        return nbMap;
-    }
-
     /**
      * @param o
      * @return Test si une map est la même qu'une autre
@@ -95,7 +94,7 @@ public class Map {
     @Override
     public String toString() {
         String lDonnee = "";
-        for(Donnee d : ListeDonnee){
+        for (Donnee d : ListeDonnee) {
             lDonnee += d.toString();
         }
         return "Map{" +

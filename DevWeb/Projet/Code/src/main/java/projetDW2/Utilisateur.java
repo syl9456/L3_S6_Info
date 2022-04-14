@@ -4,17 +4,20 @@ import java.util.Objects;
 
 public class Utilisateur {
 
+    private static int nbUtil = 0;
     private String Pseudo;
     private String MDP;
     private int ID;
-
-    private static int nbUtil = 0;
 
     public Utilisateur(String pseudo, String MDP) {
         this.Pseudo = pseudo;
         this.MDP = MDP;
         nbUtil++;
         this.ID = nbUtil;
+    }
+
+    public static int getNbUtil() {
+        return nbUtil;
     }
 
     public int getID() {
@@ -25,20 +28,16 @@ public class Utilisateur {
         this.ID = ID;
     }
 
-    public static int getNbUtil() {
-        return nbUtil;
-    }
-
     public String getMDP() {
         return MDP;
     }
 
-    public String getPseudo() {
-        return Pseudo;
-    }
-
     public void setMDP(String MDP) {
         this.MDP = MDP;
+    }
+
+    public String getPseudo() {
+        return Pseudo;
     }
 
     public void setPseudo(String pseudo) {

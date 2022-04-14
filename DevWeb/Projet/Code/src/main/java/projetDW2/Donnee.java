@@ -4,13 +4,12 @@ import java.util.Objects;
 
 public class Donnee {
 
+    private static int nbDonnee = 0;
     private int ID;
     private int IDMap;
     private Coordonnee Coord;
     private String Info;
     private int Type;
-
-    private static int nbDonnee = 0;
 
     public Donnee(int IDMap, Coordonnee coord, String info, int type) {
         this.IDMap = IDMap;
@@ -19,6 +18,10 @@ public class Donnee {
         this.Type = type;
         nbDonnee++;
         this.ID = nbDonnee;
+    }
+
+    public static int getNbDonnee() {
+        return nbDonnee;
     }
 
     public int getID() {
@@ -59,10 +62,6 @@ public class Donnee {
 
     public void setType(int type) {
         Type = type;
-    }
-
-    public static int getNbDonnee() {
-        return nbDonnee;
     }
 
     /**
