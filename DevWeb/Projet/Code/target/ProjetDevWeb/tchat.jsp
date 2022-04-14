@@ -3,13 +3,11 @@
 <html>
 <head>
     <title>Tchat</title>
-    <jsp:useBean id="LMess"
-                 scope="application"
-                 class="projetDW2.ListeMessage"/>
 </head>
 <body>
 <!-- ON AFFICHE LA LISTE DES MESSAGES -->
-<c:forEach var="m" items="${ LMess.listeMessage }">
+<%--@elvariable id="LM" type="projetDW2.ListeMessage"--%>
+<c:forEach var="m" items="${ LM.listeMessage }">
     <span> ${m.pseudoAuteur} : ${m.text} </span>
 </c:forEach>
 </body>

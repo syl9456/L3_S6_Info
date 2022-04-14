@@ -5,6 +5,8 @@ body, html {
     font-family: "Varela Round", sans-serif;
 }
 
+/**************** PAGE ACCUEIL  ****************/
+
 .Menu {
     text-align: center;
     text-transform: uppercase;
@@ -74,13 +76,54 @@ body, html {
 }
 
 .tchat{
-    position: fixed;
-    left: 200px;
-    top: 250px;
+    margin:auto;
+    display:block;
+    position: relative;
+    top: 150px;
 }
 
 .saisie{
-    position: fixed;
-    bottom: 10px;
-    left: 200px;
+    margin:auto;
+    display:block;
+    position: relative;
+    top: 150px;
+}
+
+.Inscription{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: cornsilk;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: inline-block;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.Deconnexion{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: cornsilk;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: inline-block;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.Connexion{
+    position: absolute;
+    top: 20px;
+    right: 150px;
+    color: cornsilk;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: inline-block;
+    letter-spacing: 1px;
+    text-decoration: none;
 }
