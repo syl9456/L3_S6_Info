@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Polymap</title>
+    <title>Polymap - Accueil</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="Style/styleIndex.css"/>
 </head>
@@ -37,7 +37,6 @@
     <%
         }
     %>
-    <a href="#" data-hover="Connexion">Connexion</a>
 
     <!-------------- LOGO --------------->
 
@@ -46,7 +45,12 @@
     <!-------------- TCHAT --------------->
 
     <iframe id="AffMess" title="Servlet Message" width="1500" height="600" src="tchat.jsp" class="tchat"></iframe>
-    <iframe id="SaisieMess" title="Saisie Message" width="1500" height="100" src="saisie.html" class="saisie"></iframe>
-
+    <%
+        if(session.getAttribute("_pseudo") != null){
+    %>
+            <iframe id="SaisieMess" title="Saisie Message" width="1500" height="100" src="saisie.jsp" class="saisie"></iframe>
+    <%
+        }
+    %>
 </body>
 </html>

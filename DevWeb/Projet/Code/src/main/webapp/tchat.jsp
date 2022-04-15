@@ -3,12 +3,13 @@
 <html>
 <head>
     <title>Tchat</title>
+    <link rel="stylesheet" type="text/css" href="Style/styleTchat.css"/>
 </head>
 <body>
 <!-- ON AFFICHE LA LISTE DES MESSAGES -->
 <%--@elvariable id="LM" type="projetDW2.ListeMessage"--%>
 <c:forEach var="m" items="${ LM.listeMessage }">
-    <span> ${m.pseudoAuteur} : ${m.text} </span>
+    <span class="lPseudo"> ${m.pseudoAuteur} </span> <span class="lMess"> : ${m.text} </span> <br>
 </c:forEach>
 </body>
 </html>

@@ -16,22 +16,22 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class ServletMessageController extends HttpServlet {
 
-    static ListeMessage LM = new ListeMessage();
+    static ListeMessage LM;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ServletMessageController() {
         super();
+        LM = new ListeMessage();
     }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /*  ON ENREGISTRE LA LISTE DE MESSAGE DANS LE CONTEXT PUIS ON REDIRIGE A L'INDEX */
-        this.getServletConfig().getServletContext().setAttribute("LM", LM);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/lib/index.jsp");
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);
     }
 
@@ -40,6 +40,14 @@ public class ServletMessageController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         /* ON AJOUTE UN NOUVEAU MESSAGE */
+        String t = request.getParameter("_mess") + "\n";
+        String u = (String)request.getSession().getAttribute("_pseudo");
+        int uID = (int)request.getSession().getAttribute("idUtil");
+        Message M = new Message(uID, t, u);
+        LM.getListeMessage().add(M);
+        this.getServletConfig().getServletContext().setAttribute("LM", LM);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+        requestDispatcher.forward(request, response);
     }
 
 }
