@@ -1,0 +1,24 @@
+@charset "ISO-8859-1";
+
+.grid{
+	border-style: solid;
+	border-color: blue;
+	border-width: 5px;
+}
+
+#laGrille{
+	min-height: 20px;
+}
+
+.grid div{
+	border-style: double;
+	border-color: black;
+	border-width: 1px;
+	height: 30px;
+	width: 30px;
+	display: inline-block;
+}
+
+.on{
+	background-color: chartreuse;
+}
