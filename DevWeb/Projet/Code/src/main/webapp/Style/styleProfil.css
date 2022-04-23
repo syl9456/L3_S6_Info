@@ -126,8 +126,8 @@ body, html {
 
 .nameUtil{
     position: relative;
-    top: 50px;
-    font-size: 45px;
+    top: 10px;
+    font-size: 35px;
     color: cornsilk;
     text-transform : uppercase;
     text-align: center;
@@ -146,6 +146,15 @@ body, html {
     position: relative;
     top: 10px;
     font-size: 30px;
+    color: cornsilk;
+    text-transform : uppercase;
+    text-align: center;
+}
+
+.changePhoto{
+    position: relative;
+    top: 5px;
+    font-size: 20px;
     color: cornsilk;
     text-transform : uppercase;
     text-align: center;

@@ -32,7 +32,7 @@
 
     <div class="data1">
         <img src="<%=session.getAttribute("_imageUtil")%>" alt="Image Utilisateur" class="ImUtil">
-        <p class="nameUtil">Changer d'Image de Profil</p>
+        <p class="changePhoto">Changer d'Image de Profil</p>
         <form action="ServletUploadImage" enctype="multipart/form-data" method="post">
             <input type="file" name="upImage" id="upImage" accept="image/*">
             <input type="submit" value="Envoyer">
