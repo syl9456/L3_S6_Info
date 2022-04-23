@@ -29,11 +29,13 @@ remplirLaGrille();
 /*********************** EXERCICE 3  ***********************/
 
 function ajouterDesdivs(elementARemplir){
-	for(var i = 0; i < 25; i++){
-		var ElementDiv = document.createElement("div");
-		var text = document.createTextNode(i);
-		ElementDiv.appendChild(text);
-		elementARemplir.appendChild(ElementDiv);
+	if(elementARemplir.children.length < 24){
+		for(var i = 0; i < 25; i++){
+			var ElementDiv = document.createElement("div");
+			var text = document.createTextNode(i);
+			ElementDiv.appendChild(text);
+			elementARemplir.appendChild(ElementDiv);
+		}
 	}
 	updateLesDivsDeTous();
 }
@@ -53,15 +55,17 @@ document.addEventListener("click", setupClickToFill);
 let model = [];
 
 function initModel(){
-	for(var i = 0; i < 25; i++){
+	/*for(var i = 0; i < 25; i++){
 		model.push(Math.random() < 0.5);
-	}
+	}*/
+	fetch("./data").then(response => response.json()).then(data => model = data.map((x) => x));
+	updateLesDivsDeTous();
 }
 
 initModel();
+setInterval(initModel, 1000);
 
 function updateLesDivs(elem){
-	console.log(model);
 	for(var i = 0; i < elem.children.length; i++){
 		if(model[i] == true){
 			elem.children[i].classList.add("on");
@@ -71,15 +75,17 @@ function updateLesDivs(elem){
 				elem.children[i].classList.remove("on");
 			}
 		}
-		elem.children[i].onclick = function(){
-			if(model[i] == true){
+		elem.children[i].addEventListener('click', () => {
+			/*if(model[i] == true){
 				model[i] = false;
 			}
 			else{
 				model[i] = true;
 			}
-			updateLesDivsDeTous();
-		};
+			updateLesDivsDeTous();*/
+			var myInit = { method: 'GET', cache: 'default' };
+            fetch("./data?toggle="+i, myInit);
+		});
 	}	
 }
 
