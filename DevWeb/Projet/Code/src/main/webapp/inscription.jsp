@@ -42,7 +42,7 @@
                 String P = request.getParameter("_pseudo");
                 String M = request.getParameter("_mdp");
                 String CheckPseudo = "SELECT Pseudo FROM utilisateur WHERE Pseudo LIKE '" + P + "'";
-                String InsertUtil = "INSERT INTO utilisateur(Pseudo, Mdp) VALUES ('" + P + "', '" + M + "')";
+                String InsertUtil = "INSERT INTO utilisateur(Pseudo, Mdp, Image) VALUES ('" + P + "', '" + M + "', 'ressources/ImageUtilisateurs/default.png')";
                 try{
                     Class.forName("com.mysql.jdbc.Driver");
                     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/projetdevweb", "root", "");

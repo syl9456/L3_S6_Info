@@ -10,7 +10,7 @@
 
     <!-- FORMULAIRE AJOUT MESSAGE -->
 
-    <form action="ServletMessageController" method="post" target="saisie.jsp">
+    <form action="ServletMessageController" method="post" target="index.jsp">
         <label class="Slabel" for="_mess">Message : </label>
         <input class="Sinput" type="text" name="_mess" id="_mess" size="100">
         <input type="submit" value="Valider" class="bouton">

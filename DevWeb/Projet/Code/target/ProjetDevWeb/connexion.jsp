@@ -42,7 +42,7 @@
             if(request.getParameter("_pseudo") != null && request.getParameter("_mdp") != null){
                 String P = request.getParameter("_pseudo");
                 String M = request.getParameter("_mdp");
-                String CheckUtil = "SELECT UtilID, Pseudo FROM utilisateur WHERE Pseudo LIKE '" + P + "' AND Mdp LIKE '" + M + "'";
+                String CheckUtil = "SELECT UtilID, Pseudo, Image FROM utilisateur WHERE Pseudo LIKE '" + P + "' AND Mdp LIKE '" + M + "'";
                 try{
                     Class.forName("com.mysql.jdbc.Driver");
                     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/projetdevweb", "root", "");
@@ -51,6 +51,7 @@
                     if(rst.next()){
                         session.setAttribute("_pseudo", P);
                         session.setAttribute("idUtil", rst.getInt("UtilID"));
+                        session.setAttribute("_imageUtil", rst.getString("Image"));
                         rst.close();
                         st.close();
                         conn.close();
