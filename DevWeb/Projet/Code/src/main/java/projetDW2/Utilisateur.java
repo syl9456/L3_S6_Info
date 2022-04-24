@@ -4,20 +4,14 @@ import java.util.Objects;
 
 public class Utilisateur {
 
-    private static int nbUtil = 0;
     private String Pseudo;
-    private String MDP;
+    private String Image;
     private int ID;
 
-    public Utilisateur(String pseudo, String MDP) {
+    public Utilisateur(int ID, String pseudo, String Image) {
         this.Pseudo = pseudo;
-        this.MDP = MDP;
-        nbUtil++;
-        this.ID = nbUtil;
-    }
-
-    public static int getNbUtil() {
-        return nbUtil;
+        this.Image = Image;
+        this.ID = ID;
     }
 
     public int getID() {
@@ -28,20 +22,20 @@ public class Utilisateur {
         this.ID = ID;
     }
 
-    public String getMDP() {
-        return MDP;
-    }
-
-    public void setMDP(String MDP) {
-        this.MDP = MDP;
-    }
-
     public String getPseudo() {
         return Pseudo;
     }
 
     public void setPseudo(String pseudo) {
         Pseudo = pseudo;
+    }
+    
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
     }
 
 
@@ -52,7 +46,7 @@ public class Utilisateur {
     public String toString() {
         return "Utilisateur{" +
                 "Pseudo='" + Pseudo + '\'' +
-                ", MDP='" + MDP + '\'' +
+                ", Image='" + Image + '\'' +
                 '}';
     }
 
@@ -65,6 +59,6 @@ public class Utilisateur {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Utilisateur that = (Utilisateur) o;
-        return Objects.equals(Pseudo, that.Pseudo) && Objects.equals(MDP, that.MDP);
+        return Objects.equals(Pseudo, that.Pseudo) && Objects.equals(Image, that.Image) && Objects.equals(ID, that.ID);
     }
 }

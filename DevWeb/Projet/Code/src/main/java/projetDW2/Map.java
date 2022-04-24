@@ -1,31 +1,19 @@
 package projetDW2;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.Objects;
 
 public class Map {
 
-    private static int nbMap = 0;
     private int ID;
     private int IDProprio;
     private String Nom;
     private String SrcBackground;
-    private ArrayList<Donnee> ListeDonnee;
-    private Hashtable<Integer, Integer> UtilAcces;
 
-    public Map(int IDProprio, String nom, String srcbackground) {
+    public Map(int ID, int IDProprio, String nom, String srcbackground) {
+    	this.ID = ID;
         this.IDProprio = IDProprio;
         this.Nom = nom;
         this.SrcBackground = srcbackground;
-        nbMap++;
-        this.ID = nbMap;
-        ListeDonnee = new ArrayList<Donnee>();
-        UtilAcces = new Hashtable<Integer, Integer>();
-    }
-
-    public static int getNbMap() {
-        return nbMap;
     }
 
     public int getID() {
@@ -60,22 +48,6 @@ public class Map {
         SrcBackground = srcBackground;
     }
 
-    public ArrayList<Donnee> getListeDonnee() {
-        return ListeDonnee;
-    }
-
-    public void setListeDonnee(ArrayList<Donnee> listeDonnee) {
-        ListeDonnee = listeDonnee;
-    }
-
-    public Hashtable<Integer, Integer> getUtilAcces() {
-        return UtilAcces;
-    }
-
-    public void setUtilAcces(Hashtable<Integer, Integer> utilAcces) {
-        UtilAcces = utilAcces;
-    }
-
     /**
      * @param o
      * @return Test si une map est la même qu'une autre
@@ -85,7 +57,7 @@ public class Map {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Map map = (Map) o;
-        return ID == map.ID && IDProprio == map.IDProprio && Objects.equals(Nom, map.Nom) && Objects.equals(ListeDonnee, map.ListeDonnee) && Objects.equals(UtilAcces, map.UtilAcces);
+        return ID == map.ID && IDProprio == map.IDProprio && Objects.equals(Nom, map.Nom);
     }
 
     /**
@@ -93,17 +65,11 @@ public class Map {
      */
     @Override
     public String toString() {
-        String lDonnee = "";
-        for (Donnee d : ListeDonnee) {
-            lDonnee += d.toString();
-        }
         return "Map{" +
                 "ID=" + ID +
                 ", IDProprio=" + IDProprio +
                 ", Nom='" + Nom + '\'' +
                 ", SrcBackground='" + SrcBackground + '\'' +
-                ", ListeDonnee= " + lDonnee +
-                ", UtilAcces=" + UtilAcces +
                 '}';
     }
 }
