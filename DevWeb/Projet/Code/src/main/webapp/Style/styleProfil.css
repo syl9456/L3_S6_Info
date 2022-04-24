@@ -159,3 +159,44 @@ body, html {
     text-transform : uppercase;
     text-align: center;
 }
+
+.bFile{
+    position: relative;
+    text-align: center;
+    left: 100px;
+}
+
+.bEnvoi{
+	position: relative;
+    text-align: center;
+    left: 200px;
+}
+
+.lAmis{
+	position: relative;
+    font-size: 20px;
+    color: cornsilk;
+    text-transform : uppercase;
+    text-align: center;
+}
+
+.Amiinput{
+	position:absolute;
+	bottom:40px;
+	left: 780px;
+}
+
+.bAmi{
+	position:absolute;
+	bottom:10px;
+	left: 910;
+}
+
+.textAjAmi{
+	position:absolute;
+	bottom:52px;
+	text-align: center;
+    font-size: 15px;
+    color: cornsilk;
+    left: 880px;
+}

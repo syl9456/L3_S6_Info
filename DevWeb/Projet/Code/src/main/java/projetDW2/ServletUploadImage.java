@@ -1,28 +1,25 @@
 package projetDW2;
 
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.http.HttpServlet;
-
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.sql.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 
-/*
- * Notre serlvet permettant de récupérer les fichiers côté serveur.
- * Elle répondra à l'URL /ServletUploadImage dans l'application Web considérée.
- */
-
 
 /**
- * Implémantation de la Servlet ServletUploadImage
+ * Implemantation de la Servlet ServletUploadImage
  */
 
 @WebServlet("/ServletUploadImage")
@@ -30,7 +27,12 @@ import jakarta.servlet.http.Part;
 
 public class ServletUploadImage extends HttpServlet {
 
-    public ServletUploadImage() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public ServletUploadImage() {
         super();
     }
 
@@ -46,56 +48,60 @@ public class ServletUploadImage extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         /* Pseudo de l'utilisateur */
-        String pseudo = (String)request.getSession().getAttribute("_pseudo");
-        /* Récupère toutes les info de l'image upload */
-        Part part = request.getPart("upImage");
-        /* Nom de l'image upload */
-        String nomImage = part.getSubmittedFileName();
-        /* Chemin de destination */
-        String path = "C:/Users/flori/IdeaProjects/ProjetDevWeb/src/main/webapp/ressources/ImageUtilisateurs"+File.separator+nomImage;
-        /* Prend toutes les data de l'image */
-        InputStream is = part.getInputStream();
-        /* On envois les data a uploadFile */
-        boolean x = uploadFile(is, path);
-        if(x){
-            /* On stock dans BDD */
-            System.out.println("Reussite");
-            String updateImage = "UPDATE utilisateur SET Image = 'ressources/ImageUtilisateurs/" + nomImage + "' WHERE Pseudo LIKE '" + pseudo + "'";
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/projetdevweb", "root", "");
-                Statement st = conn.createStatement();
-                int rst = st.executeUpdate(updateImage);
-                st.close();
-                conn.close();
-                request.getSession().setAttribute("_imageUtil", "ressources/ImageUtilisateurs/" + nomImage);
-                response.sendRedirect("profil.jsp");
-
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        else{
-            /* Erreur */
-            System.out.println("Erreur");
-            response.sendRedirect("profil.jsp");
-        }
-    }
-
-    public boolean uploadFile(InputStream is, String path){
-        boolean test = false;
+        String Pseu = (String)request.getSession().getAttribute("_pseudo");
+        /* Récupération données de l'utilisateur */
+        Part image = request.getPart("upImage");
+        /* Nom de l'image */
+        String imageName = image.getSubmittedFileName();
+        /* Destination upload image */
+        String path = "C:/Users/flori/eclipse-workspace/ProjetDevWeb/src/main/webapp/ressources/ImageUtilisateurs/" + imageName;
         try{
-            /* On copie l'image */
-            Files.copy(is, Paths.get(path));
-            test = true;
+            /* Outils pour enregistrer l'image */
+            FileOutputStream fos = new FileOutputStream(path);
+            /* On charge l'image */
+            InputStream is = image.getInputStream();
+            byte[] data = new byte[is.available()];
+            /* On enregistre l'image */
+            is.read(data);
+            fos.write(data);
+            /* On ferme la lecture de données */
+            fos.close();
         }
         catch (Exception e){
             e.printStackTrace();
         }
-        return test;
-    }
+        /* On enregistre dans la base de donnée */
+        try {
+            /* Database */
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/projetdevweb", "root", "");
+            String requete = "UPDATE utilisateur SET Image = 'ressources/ImageUtilisateurs/" + imageName + "' WHERE Pseudo LIKE '" + Pseu + "'";
+            Statement st = conn.createStatement();
+            int result = st.executeUpdate(requete);
+            if(result > 0){
+                System.out.println("Image bien Update");
+                st.close();
+                conn.close();
+                request.getSession().setAttribute("_imageUtil", "ressources/ImageUtilisateurs/"+imageName);
+                /* On attends 5 sec que l'image s'enregistre */
+                try {
+        			Thread.sleep(5000);
+        		} catch (InterruptedException e1) {
+        			// TODO Auto-generated catch block
+        			e1.printStackTrace();
+        		}
+                response.sendRedirect("profil.jsp");
+            }
+            else{
+                System.out.println("Erreur Update");
+                st.close();
+                conn.close();
+                response.sendRedirect("profil.jsp");
+            }
 
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

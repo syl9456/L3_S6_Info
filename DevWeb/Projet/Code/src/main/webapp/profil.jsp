@@ -31,20 +31,28 @@
     <!-------------- RESUME PROFIL --------------->
 
     <div class="data1">
-        <img src="<%=session.getAttribute("_imageUtil")%>" alt="Image Utilisateur" class="ImUtil">
+        <img src="<%=request.getSession().getAttribute("_imageUtil")%>" alt="Image Utilisateur" class="ImUtil">
         <p class="changePhoto">Changer d'Image de Profil</p>
         <form action="ServletUploadImage" enctype="multipart/form-data" method="post">
-            <input type="file" name="upImage" id="upImage" accept="image/*">
-            <input type="submit" value="Envoyer">
+            <input type="file" name="upImage" accept="image/*" class="bFile"><br>
+            <input type="submit" value="Envoyer" class="bEnvoi">
         </form>
         <p class="nameUtil"><%=session.getAttribute("_pseudo")%></p>
     </div>
-    <div class="data2">
-        <p class="titreAmis">Liste des Amis</p>
-    </div>
-    <div class="data3">
+    <iframe class="data2" src="listeAmi.jsp">
+        
+    </iframe>
+    <iframe class="data3" src="listeMap.jsp">
         <p class="titreMap">Map Créées</p>
-    </div>
+    </iframe>
+    
+    <!-- FORMULAIRE AJOUT AMI -->
+    <form action="ServletAjoutAmi" method="post">
+        <input class="Amiinput" type="text" name="_ami" id="_ami" size="50">
+        <input type="submit" value="Valider" class="bAmi">
+    </form>
+    
+    <p class="textAjAmi">Ajouter un Ami !</p>
 
 </body>
 </html>
