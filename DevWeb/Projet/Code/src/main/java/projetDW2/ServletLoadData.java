@@ -149,6 +149,7 @@ public class ServletLoadData extends HttpServlet {
         request.getServletContext().setAttribute("LDon", LDon);
         request.getServletContext().setAttribute("LAcc", LAcc);
         request.getServletContext().setAttribute("LUtil", LUtil);
+        request.getServletContext().setAttribute("Charge", 1);
 		
         response.sendRedirect("index.jsp");
 		

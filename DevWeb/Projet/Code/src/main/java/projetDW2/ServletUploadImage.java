@@ -49,7 +49,7 @@ public class ServletUploadImage extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         /* Pseudo de l'utilisateur */
         String Pseu = (String)request.getSession().getAttribute("_pseudo");
-        /* Récupération données de l'utilisateur */
+        /* Récupération données de l'image */
         Part image = request.getPart("upImage");
         /* Nom de l'image */
         String imageName = image.getSubmittedFileName();

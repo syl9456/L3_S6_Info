@@ -35,7 +35,7 @@
         </form>
     </div>
 
-    <!-------------- SI ON RECOIS UNE REQUETE FORMULAIRE INSCRIPTION --------------->
+    <!-------------- SI ON RECOIS UNE REQUETE FORMULAIRE CONNEXION --------------->
 
     <%
         if(request.getParameter("submit") != null){

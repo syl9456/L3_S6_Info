@@ -10,6 +10,14 @@
 </head>
 <body>
 
+	<!-------------- TEST SI LES DONNEES ONT ETE CHARGEE --------------->
+	
+	<%
+		if(pageContext.getServletContext().getAttribute("Charge") == null){
+			response.sendRedirect("ServletLoadData");
+		}
+	%>
+
     <!-------------- MENU --------------->
 
     <nav class="navStyle">

@@ -51,7 +51,7 @@ public class ServletAjoutAmi extends HttpServlet {
 	         ResultSet rst = st.executeQuery(requete);
 	         if(rst.next()){
 	        	 idAmi = rst.getInt("UtilID");
-	        	 /* On insere l'amis vue quue l'on a son ID */
+	        	 /* On insere l'amis vue que l'on a son ID */
 	        	 String insertAmi = "INSERT INTO amitie (UtilID1, UtilID2) VALUES (" + idUtil + ", " + idAmi + ")";
 	        	 int rst2 = st.executeUpdate(insertAmi);
 	        	 rst.close();

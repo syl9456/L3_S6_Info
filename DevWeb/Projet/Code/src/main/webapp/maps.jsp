@@ -1,8 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Polymap - Maps</title>
-    <link rel="stylesheet" type="text/css" href="Style/styleProfil.css"/>
+    <link rel="stylesheet" type="text/css" href="Style/styleMap.css"/>
 </head>
 <body>
 
@@ -29,9 +30,13 @@
     <img class="Logo" src="ressources/Polymap.png" alt="logo">
     
     <!-------------- LISTE DES MAPS CREEES --------------->
+    <br><br><br><br><br>
     
-    
-
+		<c:forEach var="m" items="${ LMap.getListeMap() }">
+			<div class="BoutonMap" style="background-image: url('${ m.getSrcBackground() }')">
+				<a href="viewMap.jsp?name=${ m.getNom() }" class="TextMap">${ m.getNom() }</a>
+			</div><br>
+		</c:forEach>
 
 </body>
 </html>

@@ -4,11 +4,36 @@
     <servlet>
         <servlet-name>MessageController</servlet-name>
         <servlet-class>projetDW2.ServletMessageController</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletAjoutAmi</servlet-name>
+        <servlet-class>projetDW2.ServletAjoutAmi</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletUploadImage</servlet-name>
+        <servlet-class>projetDW2.ServletUploadImage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletLoadData</servlet-name>
+        <servlet-class>projetDW2.ServletLoadData</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>MessageController</servlet-name>
         <url-pattern>/MC</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAjoutAmi</servlet-name>
+        <url-pattern>/SAA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletUploadImage</servlet-name>
+        <url-pattern>/SUI</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletLoadData</servlet-name>
+        <url-pattern>/SLD</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
