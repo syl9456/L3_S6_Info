@@ -31,9 +31,9 @@
     
     %>
 	
-    <img alt="photoMap" src="<%=image%>">
-    
+    <img alt="photoMap" src="<%=image%>" class="ImageMap" id=""map>
     
 
 </body>
 </html>
+

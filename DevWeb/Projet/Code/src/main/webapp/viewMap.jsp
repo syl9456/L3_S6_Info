@@ -30,7 +30,8 @@
     
     <!-------------- MAP --------------->
 	
-    <iframe id="AffMap" title="AffMap" width="1800" height="800" src="affMap.jsp?name=<%= request.getParameter("name") %>" class="AffMap"></iframe>
+    <iframe id="AffMap" title="AffMap" width="1600" height="800" src="affMap.jsp?name=<%= request.getParameter("name") %>" class="AffMap"></iframe>
 
 </body>
 </html>
+
