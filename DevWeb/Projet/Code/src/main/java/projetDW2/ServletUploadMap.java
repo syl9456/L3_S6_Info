@@ -102,11 +102,15 @@ public class ServletUploadMap extends HttpServlet {
                         rst.close();
                         st.close();
                         conn.close();
-                        /* On modifie la liste des maps du context */
+                        /* On modifie la liste des maps et des acces du context */
                         Map m = new Map(IDmap, ID, nom, "ressources/Maps/" + imageName);
+                        Acces a = new Acces(ID, IDmap, 1);
                         ListeMap lm = (ListeMap)request.getServletContext().getAttribute("LMap");
+                        ListeAcces la = (ListeAcces)request.getServletContext().getAttribute("LAcc");
                         lm.getListeMap().add(m);
+                        la.getListeAcces().add(a);
                         request.getServletContext().setAttribute("LMap", lm);
+                        request.getServletContext().setAttribute("LAcc", la);
                         /* On redirige */
                         response.sendRedirect("maps.jsp");
                     }

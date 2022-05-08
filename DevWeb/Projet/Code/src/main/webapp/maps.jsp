@@ -7,11 +7,14 @@
 </head>
 <body>
 
+	<!-------------- SI PAS CONNECTE ALORS REDIRECTION INDEX --------------->
+
     <%
         if(session.getAttribute("_pseudo") == null){
             response.sendRedirect("index.jsp");
         }
     %>
+    
 
     <!-------------- MENU --------------->
 
