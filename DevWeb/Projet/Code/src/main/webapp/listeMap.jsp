@@ -18,7 +18,7 @@
 	         /* Database */
 	         Class.forName("com.mysql.jdbc.Driver");
 	         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/projetdevweb", "root", "");
-	         String requete = "SELECT Nom, Droit FROM map, utilaccesmap WHERE utilaccesmap.UtilID = " + utilID;
+	         String requete = "SELECT map.Nom, utilaccesmap.Droit FROM utilaccesmap, map WHERE utilaccesmap.UtilID = " + utilID + " AND utilaccesmap.MapID = map.MapID";
 	         Statement st = conn.createStatement();
 	         ResultSet rst = st.executeQuery(requete);
 	         while(rst.next()){

@@ -37,6 +37,16 @@
 				<a href="viewMap.jsp?name=${ m.getNom() }" class="TextMap">${ m.getNom() }</a>
 			</div><br>
 		</c:forEach>
+		
+		<div class="main">
+        <p class="sign">Ajouter une Map</p>
+        <form action="ServletUploadMap" enctype="multipart/form-data" method="post">
+            <input name="_nom" class="un" type="text" placeholder="Nom de la Map"/>
+             <p class="upIm">Image de la Map</p>
+            <input type="file" name="ImMap" accept="image/*" class="bFile"><br><br>
+            <input type="submit" value="Upload Map" name="submit" class="submit"/>
+        </form>
+    </div>
 
 </body>
 </html>
