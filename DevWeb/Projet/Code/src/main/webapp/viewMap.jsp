@@ -3,7 +3,9 @@
 <%@ page import="projetDW2.Map" %>
 <%@ page import="projetDW2.Acces" %>
 <%@ page import="projetDW2.ListeAcces" %>
+<%@ page import="projetDW2.ListeDonnee" %>
 <%@ page import="java.util.ArrayList" %>
+
 <html>
 <head>
     <title>Polymap - Maps</title>
@@ -15,7 +17,8 @@
         if(session.getAttribute("_pseudo") == null){
             response.sendRedirect("index.jsp");
         }
-    %>
+	%>
+
 
     <!-------------- MENU --------------->
 
@@ -69,12 +72,20 @@
 	%>
 			
 			<a href="viewMap.jsp?name=<%= request.getParameter("name") %>&ping=key">
-  				<img src="ressources/key.png" style="height: 100px; width: 100px;"/>
+  				<img src="ressources/key.png" style="position: absolute; top: 200px; left: 10px; height: 100px; width: 100px;"/>
+ 			</a>
+ 			
+ 			<a href="viewMap.jsp?name=<%= request.getParameter("name") %>&ping=heart">
+  				<img src="ressources/heart.png" style="position: absolute; top: 400px; left: 10px; height: 100px; width: 100px;"/>
+ 			</a>
+ 			
+ 			<a href="viewMap.jsp?name=<%= request.getParameter("name") %>&ping=wood">
+  				<img src="ressources/wood.png" style="position: absolute; top: 600px; left: 10px; height: 100px; width: 100px;"/>
  			</a>
 	
 	<%
 	    }
-	    
+
     %>
 
 </body>
@@ -121,5 +132,39 @@
 			}
 		}
 	}
+	
+	/* On check si on doit reload la page toute les 0.1 seconde */
+	var intervalId = window.setInterval(function(){
+		getReload();
+	}, 100);
+	
+	/* Fonction qui va demander a une servlet si on doit reload la page */
+	
+	function getReload(){
+		var client;
+		var data;
+		var url_action="http://localhost:8080/ProjetDevWeb/ServletReload";
+		if(window.XMLHttpRequest){
+		    client=new XMLHttpRequest();
+		}
+		else{
+		    client=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		client.onreadystatechange=function(){
+		    if (client.readyState==4 && client.status==200){
+		         console.log(client.responseText);
+		         if(client.responseText == 1){
+		        	 console.log("ON REFRESH");
+		        	 window.location.reload();
+		         }
+		    }
+		};
+		data="";
+		client.open("POST",url_action,true);
+		client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		client.send(data);
+	}
+
+	
 </script>
 

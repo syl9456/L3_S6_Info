@@ -27,6 +27,10 @@
         <servlet-name>ServletAjoutPing</servlet-name>
         <servlet-class>projetDW2.ServletAjoutPing</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletReload</servlet-name>
+        <servlet-class>projetDW2.ServletReload</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MessageController</servlet-name>
         <url-pattern>/MC</url-pattern>
@@ -50,6 +54,10 @@
     <servlet-mapping>
         <servlet-name>ServletAjoutPing</servlet-name>
         <url-pattern>/SAP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletReload</servlet-name>
+        <url-pattern>/SR</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

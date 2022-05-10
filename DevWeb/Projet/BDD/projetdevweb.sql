@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 10 mai 2022 à 11:04
+-- Généré le : mar. 10 mai 2022 à 16:52
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `donnee` (
   `Type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Type de la donnée',
   PRIMARY KEY (`DataID`),
   KEY `FK_Donnee_Map` (`MapID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `donnee`
@@ -74,7 +74,24 @@ INSERT INTO `donnee` (`DataID`, `MapID`, `CoordX`, `CoordY`, `Info`, `Type`) VAL
 (2, 1, 209, 254, 'Je suis un ping de type [key]', 'key'),
 (3, 1, 677, 257, 'Je suis un ping de type [key]', 'key'),
 (4, 1, 385, 600, 'Je suis un ping de type [key]', 'key'),
-(5, 3, 3407, 1480, 'Je suis un ping de type [key]', 'key');
+(5, 3, 3407, 1480, 'Je suis un ping de type [key]', 'key'),
+(6, 1, 231, 1573, 'Je suis un ping de type [key]', 'key'),
+(7, 1, 1747, 2152, 'Je suis un ping de type [key]', 'key'),
+(8, 1, 1540, 440, 'Je suis un ping de type [key]', 'key'),
+(9, 1, 2203, 1665, 'Je suis un ping de type [key]', 'key'),
+(10, 1, 1320, 1351, 'Je suis un ping de type [key]', 'key'),
+(11, 1, 3363, 1897, 'Je suis un ping de type [key]', 'key'),
+(12, 1, 2731, 599, 'Je suis un ping de type [key]', 'key'),
+(13, 1, 2531, 433, 'Je suis un ping de type [key]', 'key'),
+(14, 1, 3177, 1073, 'Je suis un ping de type [key]', 'key'),
+(15, 1, 2592, 325, 'Je suis un ping de type [key]', 'key'),
+(16, 1, 299, 595, 'Je suis un ping de type [key]', 'key'),
+(17, 1, 480, 696, 'Je suis un ping de type [key]', 'key'),
+(18, 1, 497, 332, 'Je suis un ping de type [key]', 'key'),
+(19, 1, 890, 1281, 'Je suis un ping de type [key]', 'key'),
+(20, 1, 945, 288, 'Je suis un ping de type [key]', 'key'),
+(21, 1, 1160, 557, 'Je suis un ping de type [key]', 'key'),
+(23, 1, 909, 2181, 'Je suis un ping de type [heart]', 'heart');
 
 -- --------------------------------------------------------
 

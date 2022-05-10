@@ -51,6 +51,16 @@
    					<img alt="imKey" src="ressources/key.png" style="position: absolute; left: <%= X %>; top: <%= Y %>" id="imKey">
    	<%
    				}
+   				else if("wood".compareTo(ld.get(i).getType()) == 0){
+   	%>
+   					<img alt="imWood" src="ressources/wood.png" style="position: absolute; left: <%= X %>; top: <%= Y %>" id="imWood">
+   	<%
+   				}
+   				else if("heart".compareTo(ld.get(i).getType()) == 0){
+   	%>
+   					<img alt="imheart" src="ressources/heart.png" style="position: absolute; left: <%= X %>; top: <%= Y %>" id="imHeart">
+   	<%
+   				}
     
     		}
     	}

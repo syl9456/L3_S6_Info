@@ -58,6 +58,15 @@ public class ServletAjoutPing extends HttpServlet {
             	ListeDonnee LDon = (ListeDonnee)request.getServletContext().getAttribute("LDon");
             	LDon.getListeDonnee().add(d);
             	request.getServletContext().setAttribute("LDon", LDon);
+            	getServletContext().setAttribute("Reload", 1);
+            	/* On attends 2 sec que les autre utilisateurs ont l'info de refrsh la page */
+                try {
+        			Thread.sleep(120);
+        		} catch (InterruptedException e1) {
+        			// TODO Auto-generated catch block
+        			e1.printStackTrace();
+        		}
+                getServletContext().setAttribute("Reload", 0);
             	st.close();
             	conn.close();
             }
