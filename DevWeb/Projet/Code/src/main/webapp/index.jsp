@@ -74,10 +74,4 @@
 </body>
 </html>
 
-<script>
-    /* On refrech le tchat toute les secondes */
-    window.setInterval("reloadIFrame();", 1000);
-    function reloadIFrame() {
-        document.getElementById("AffMess").src="tchat.jsp";
-    }
-</script>
+

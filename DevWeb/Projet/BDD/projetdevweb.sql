@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 10 mai 2022 à 16:52
+-- Généré le : mar. 10 mai 2022 à 21:11
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `donnee` (
   `Type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Type de la donnée',
   PRIMARY KEY (`DataID`),
   KEY `FK_Donnee_Map` (`MapID`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `donnee`
@@ -91,7 +91,9 @@ INSERT INTO `donnee` (`DataID`, `MapID`, `CoordX`, `CoordY`, `Info`, `Type`) VAL
 (19, 1, 890, 1281, 'Je suis un ping de type [key]', 'key'),
 (20, 1, 945, 288, 'Je suis un ping de type [key]', 'key'),
 (21, 1, 1160, 557, 'Je suis un ping de type [key]', 'key'),
-(23, 1, 909, 2181, 'Je suis un ping de type [heart]', 'heart');
+(23, 1, 909, 2181, 'Je suis un ping de type [heart]', 'heart'),
+(24, 7, 304, 1989, 'Je suis un ping de type [wood]', 'wood'),
+(25, 1, 2123, 1804, 'Je suis un ping de type [heart]', 'heart');
 
 -- --------------------------------------------------------
 

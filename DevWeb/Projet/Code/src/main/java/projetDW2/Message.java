@@ -2,6 +2,10 @@ package projetDW2;
 
 import java.util.Objects;
 
+/**
+ * Class pour stocker un Message
+ */
+
 public class Message {
 
     private static int nbMess = 0;
@@ -10,6 +14,11 @@ public class Message {
     private String PseudoAuteur;
     private String Text;
 
+    /**
+     * @param IDAuteur
+     * @param text
+     * @param PsAu
+     */
     public Message(int IDAuteur, String text, String PsAu) {
         this.IDAuteur = IDAuteur;
         this.Text = text;
@@ -18,45 +27,72 @@ public class Message {
         this.ID = nbMess;
     }
 
+    /**
+     * @return
+     */
     public static int getNbMess() {
         return nbMess;
     }
 
+    /**
+     * @return
+     */
     public int getID() {
         return ID;
     }
 
+    /**
+     * @param ID
+     */
     public void setID(int ID) {
         this.ID = ID;
     }
 
+    /**
+     * @return
+     */
     public int getIDAuteur() {
         return IDAuteur;
     }
 
+    /**
+     * @param IDAuteur
+     */
     public void setIDAuteur(int IDAuteur) {
         this.IDAuteur = IDAuteur;
     }
 
+    /**
+     * @return
+     */
     public String getPseudoAuteur() {
         return PseudoAuteur;
     }
 
+    /**
+     * @param pseudoAuteur
+     */
     public void setPseudoAuteur(String pseudoAuteur) {
         PseudoAuteur = pseudoAuteur;
     }
 
+    /**
+     * @return
+     */
     public String getText() {
         return Text;
     }
 
+    /**
+     * @param text
+     */
     public void setText(String text) {
         Text = text;
     }
 
     /**
      * @param o
-     * @return test si un Message est le même qu'un autre
+     * @return test si un Message est le meme qu'un autre
      */
     @Override
     public boolean equals(Object o) {

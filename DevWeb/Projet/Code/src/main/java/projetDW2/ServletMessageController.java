@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Implémantation de la Servlet ServletMessageController
+ * Implemantation de la Servlet ServletMessageController
  */
 
 @WebServlet("/ServletMessageController")
@@ -46,6 +46,15 @@ public class ServletMessageController extends HttpServlet {
         Message M = new Message(uID, t, u);
         LM.getListeMessage().add(M);
         this.getServletConfig().getServletContext().setAttribute("LM", LM);
+        getServletContext().setAttribute("ReloadMess", 1);
+    	/* On attends 2 sec que les autre utilisateurs ont l'info de refresh le tchat */
+        try {
+			Thread.sleep(120);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        getServletContext().setAttribute("ReloadMess", 0);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);
     }

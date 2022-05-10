@@ -2,6 +2,10 @@ package projetDW2;
 
 import java.util.Objects;
 
+/**
+ * Class pour stocker une Map
+ */
+
 public class Map {
 
     private int ID;
@@ -9,6 +13,12 @@ public class Map {
     private String Nom;
     private String SrcBackground;
 
+    /**
+     * @param ID
+     * @param IDProprio
+     * @param nom
+     * @param srcbackground
+     */
     public Map(int ID, int IDProprio, String nom, String srcbackground) {
     	this.ID = ID;
         this.IDProprio = IDProprio;
@@ -16,34 +26,58 @@ public class Map {
         this.SrcBackground = srcbackground;
     }
 
+    /**
+     * @return
+     */
     public int getID() {
         return ID;
     }
 
+    /**
+     * @param ID
+     */
     public void setID(int ID) {
         this.ID = ID;
     }
 
+    /**
+     * @return
+     */
     public int getIDProprio() {
         return IDProprio;
     }
 
+    /**
+     * @param IDProprio
+     */
     public void setIDProprio(int IDProprio) {
         this.IDProprio = IDProprio;
     }
 
+    /**
+     * @return
+     */
     public String getNom() {
         return Nom;
     }
 
+    /**
+     * @param nom
+     */
     public void setNom(String nom) {
         Nom = nom;
     }
 
+    /**
+     * @return
+     */
     public String getSrcBackground() {
         return SrcBackground;
     }
 
+    /**
+     * @param srcBackground
+     */
     public void setSrcBackground(String srcBackground) {
         SrcBackground = srcBackground;
     }

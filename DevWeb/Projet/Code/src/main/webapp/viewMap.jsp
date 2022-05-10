@@ -154,7 +154,6 @@
 		    if (client.readyState==4 && client.status==200){
 		         console.log(client.responseText);
 		         if(client.responseText == 1){
-		        	 console.log("ON REFRESH");
 		        	 window.location.reload();
 		         }
 		    }

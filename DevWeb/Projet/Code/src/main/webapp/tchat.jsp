@@ -13,3 +13,36 @@
     </c:forEach>
 </body>
 </html>
+
+<script>
+	/* On check si on doit reload le tchat toute les 0.1 seconde */
+	var intervalId = window.setInterval(function(){
+		getReload();
+	}, 100);
+	
+	/* Fonction qui va demander a une servlet si on doit reload le tchat */
+	
+	function getReload(){
+		var client;
+		var data;
+		var url_action="http://localhost:8080/ProjetDevWeb/ServletReloadMess";
+		if(window.XMLHttpRequest){
+		    client=new XMLHttpRequest();
+		}
+		else{
+		    client=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		client.onreadystatechange=function(){
+		    if (client.readyState==4 && client.status==200){
+		         console.log(client.responseText);
+		         if(client.responseText == 1){
+		        	 window.location.reload();
+		         }
+		    }
+		};
+		data="";
+		client.open("POST",url_action,true);
+		client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		client.send(data);
+	}
+</script>

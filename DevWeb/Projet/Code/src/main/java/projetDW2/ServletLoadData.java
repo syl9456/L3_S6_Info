@@ -151,6 +151,7 @@ public class ServletLoadData extends HttpServlet {
         request.getServletContext().setAttribute("LUtil", LUtil);
         request.getServletContext().setAttribute("Charge", 1);
         request.getServletContext().setAttribute("Reload", 0);
+        request.getServletContext().setAttribute("ReloadMess", 0);
 		
         response.sendRedirect("index.jsp");
 		
