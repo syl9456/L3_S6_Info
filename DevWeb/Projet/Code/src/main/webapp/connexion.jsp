@@ -15,8 +15,6 @@
             <li><a href="index.jsp" data-hover="Accueil">Accueil</a></li>
             <li><a href="#" data-hover="Profil">Profil</a></li>
             <li><a href="#" data-hover="Map">Map</a></li>
-            <li><a href="#" data-hover="FAQ">FAQ</a></li>
-            <li><a href="#" data-hover="Contact">Contact</a></li>
         </ul>
     </nav>
 

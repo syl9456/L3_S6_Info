@@ -23,8 +23,6 @@
             <li><a href="index.jsp" data-hover="Accueil">Accueil</a></li>
             <li><a href="profil.jsp" data-hover="Profil">Profil</a></li>
             <li class="current"><a href="maps.jsp" data-hover="Map">Map</a></li>
-            <li><a href="#" data-hover="FAQ">FAQ</a></li>
-            <li><a href="#" data-hover="Contact">Contact</a></li>
         </ul>
     </nav>
 

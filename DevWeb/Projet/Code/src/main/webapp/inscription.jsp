@@ -14,8 +14,6 @@
             <li><a href="index.jsp" data-hover="Accueil">Accueil</a></li>
             <li><a href="#" data-hover="Profil">Profil</a></li>
             <li><a href="#" data-hover="Map">Map</a></li>
-            <li><a href="#" data-hover="FAQ">FAQ</a></li>
-            <li><a href="#" data-hover="Contact">Contact</a></li>
         </ul>
     </nav>
 
@@ -56,21 +54,21 @@
                     st.close();
                     conn.close();
                     System.out.println("Erreur : Le Pseudo n'est pas disponible !");
-                }
-                else{
-                    int rst2 = st.executeUpdate(InsertUtil);
-                    rst.close();
-                    st.close();
-                    conn.close();
-                    response.sendRedirect("index.jsp");
-                }
-            }
-            catch(Exception e)
-            {
-                System.out.print(e);
-                e.printStackTrace();
-            }
-        }
+                	}
+                	else{
+	                    int rst2 = st.executeUpdate(InsertUtil);
+	                    rst.close();
+	                    st.close();
+	                    conn.close();
+	                    response.sendRedirect("index.jsp");
+	                }
+	            }
+	            catch(Exception e)
+	            {
+	                System.out.print(e);
+	                e.printStackTrace();
+	            }
+        	}
         else{
         %>
         <h3 class="Erreur">Erreur : Les champs de l'inscription ne sont pas tous plein !</h3>

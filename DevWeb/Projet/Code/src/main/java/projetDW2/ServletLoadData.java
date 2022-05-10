@@ -53,7 +53,7 @@ public class ServletLoadData extends HttpServlet {
 				 Donnee d = new Donnee(rst.getInt("MapID"), 
 						 			   new Coordonnee(rst.getInt("CoordX"), rst.getInt("CoordY")),
 						 			   rst.getString("Info"),
-						 			   rst.getInt("Type"));
+						 			   rst.getString("Type"));
 				 LDon.getListeDonnee().add(d);
 			}
 			rst.close();

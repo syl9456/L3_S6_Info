@@ -9,9 +9,9 @@ public class Donnee {
     private int IDMap;
     private Coordonnee Coord;
     private String Info;
-    private int Type;
+    private String Type;
 
-    public Donnee(int IDMap, Coordonnee coord, String info, int type) {
+    public Donnee(int IDMap, Coordonnee coord, String info, String type) {
         this.IDMap = IDMap;
         this.Coord = coord;
         this.Info = info;
@@ -56,11 +56,11 @@ public class Donnee {
         Info = info;
     }
 
-    public int getType() {
+    public String getType() {
         return Type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         Type = type;
     }
 
