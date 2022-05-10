@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 25 avr. 2022 à 12:52
+-- Généré le : mar. 10 mai 2022 à 11:04
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -44,7 +44,8 @@ INSERT INTO `amitie` (`UtilID1`, `UtilID2`) VALUES
 (6, 1),
 (6, 2),
 (2, 3),
-(6, 3);
+(6, 3),
+(6, 7);
 
 -- --------------------------------------------------------
 
@@ -58,11 +59,22 @@ CREATE TABLE IF NOT EXISTS `donnee` (
   `MapID` int(11) NOT NULL COMMENT 'PK de la Map dans laquelle la Donnée est Présente',
   `CoordX` int(11) NOT NULL COMMENT 'Coord X de la Donnée',
   `CoordY` int(11) NOT NULL COMMENT 'Coord Y de la Donnée',
-  `Info` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Info de la donnée',
-  `Type` int(11) NOT NULL COMMENT 'Type de la donnée',
+  `Info` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Type de la donnée',
   PRIMARY KEY (`DataID`),
   KEY `FK_Donnee_Map` (`MapID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `donnee`
+--
+
+INSERT INTO `donnee` (`DataID`, `MapID`, `CoordX`, `CoordY`, `Info`, `Type`) VALUES
+(1, 1, 691, 1019, 'Je suis un ping de type [key]', 'key'),
+(2, 1, 209, 254, 'Je suis un ping de type [key]', 'key'),
+(3, 1, 677, 257, 'Je suis un ping de type [key]', 'key'),
+(4, 1, 385, 600, 'Je suis un ping de type [key]', 'key'),
+(5, 3, 3407, 1480, 'Je suis un ping de type [key]', 'key');
 
 -- --------------------------------------------------------
 
@@ -79,16 +91,18 @@ CREATE TABLE IF NOT EXISTS `map` (
   PRIMARY KEY (`MapID`),
   UNIQUE KEY `Nom_Map` (`Nom`),
   KEY `FK_Map_Util` (`ProprioID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `map`
 --
 
 INSERT INTO `map` (`MapID`, `ProprioID`, `Nom`, `SrcBackground`) VALUES
-(1, 2, 'Lin\'s Awakening Cocolint', 'ressources/Maps/link-awakening-remake-cartes-cocolint-hd-000.jpg'),
+(1, 2, 'Link\'s Awakening Cocolint', 'ressources/Maps/link-awakening-remake-cartes-cocolint-hd-000.jpg'),
 (2, 1, 'Dofus - Frigost', 'ressources/Maps/frigost.png'),
-(3, 6, 'Dofus - Incarnam', 'ressources/Maps/Incarnam.png');
+(3, 6, 'Dofus - Incarnam', 'ressources/Maps/Incarnam.png'),
+(7, 2, 'Pokemon', 'ressources/Maps/mapPokemon.jpg'),
+(8, 2, 'Pokemon2', 'ressources/Maps/mapPokemon2.jpg');
 
 -- --------------------------------------------------------
 
@@ -127,6 +141,8 @@ CREATE TABLE IF NOT EXISTS `utilaccesmap` (
 INSERT INTO `utilaccesmap` (`UtilID`, `MapID`, `Droit`) VALUES
 (1, 2, 1),
 (2, 1, 1),
+(2, 7, 1),
+(2, 8, 1),
 (6, 3, 1);
 
 -- --------------------------------------------------------
